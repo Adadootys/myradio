@@ -2,14 +2,28 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>MyRadio - Radio Malaysia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>MYRADIO ROYALE — Exclusive Radio Edition</title>
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#050507">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
+    :root {
+      --gold-1: #dfba73;
+      --gold-2: #c59b48;
+      --gold-3: #9b7829;
+      --gold-gradient: linear-gradient(135deg, #fbe8ad 0%, #dfba73 35%, #b88628 75%, #e6ca85 100%);
+      --gold-glow: 0 0 25px rgba(223, 186, 115, 0.28);
+      --bg-dark: #070709;
+      --card-bg: rgba(18, 18, 22, 0.72);
+      --card-border: rgba(223, 186, 115, 0.16);
+      --text-muted: #8e8e98;
+    }
     * {
       box-sizing: border-box;
       margin: 0;
@@ -18,67 +32,148 @@
       user-select: none;
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: linear-gradient(180deg, #0b1120 0%, #0f172a 100%);
-      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #15141c 0%, #08080a 50%, #030304 100%);
+      background-attachment: fixed;
+      color: #f5f5f7;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
     }
+    
+    /* Subtle luxury mesh effect */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; height: 350px;
+      background: radial-gradient(ellipse at 50% 10%, rgba(197, 155, 72, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
     header {
-      padding: 16px 20px;
+      padding: 18px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(10, 10, 13, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
-      z-index: 20;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 25;
+      border-bottom: 1px solid rgba(223, 186, 115, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
     }
     .logo-box {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
-    .logo-icon {
-      font-size: 26px;
+    .crown-emblem {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #1f1d24, #121116);
+      border: 1px solid rgba(223, 186, 115, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), var(--gold-glow);
     }
-    .logo-title {
+    .brand-title {
+      font-family: 'Cinzel', serif;
       font-size: 19px;
-      font-weight: 800;
-      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
     }
     .tagline {
-      font-size: 11px;
-      color: #94a3b8;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #9a9ab0;
+      text-transform: uppercase;
+      font-weight: 600;
     }
+    .vip-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 30px;
+      background: rgba(197, 155, 72, 0.12);
+      border: 1px solid rgba(223, 186, 115, 0.4);
+      color: #e8cb89;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+    .vip-dot {
+      width: 6px;
+      height: 6px;
+      background: #dfba73;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #dfba73;
+    }
+
+    /* Stats bar */
+    .exclusive-bar {
+      padding: 10px 20px 2px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
     .search-box {
-      padding: 12px 18px 6px;
+      padding: 10px 20px 6px;
+      position: relative;
     }
     .search-input {
       width: 100%;
-      padding: 12px 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(30, 41, 59, 0.7);
-      color: #f8fafc;
-      font-size: 14px;
+      padding: 14px 18px 14px 44px;
+      border-radius: 14px;
+      border: 1px solid rgba(223, 186, 115, 0.18);
+      background: rgba(17, 17, 22, 0.85);
+      backdrop-filter: blur(12px);
+      color: #fbfbfb;
+      font-size: 13px;
+      font-weight: 500;
       outline: none;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .search-icon-pos {
+      position: absolute;
+      left: 34px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      opacity: 0.6;
+      pointer-events: none;
     }
     .search-input:focus {
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+      border-color: rgba(223, 186, 115, 0.7);
+      box-shadow: 0 0 20px rgba(223, 186, 115, 0.22);
+      background: rgba(22, 22, 28, 0.95);
     }
+    .search-input::placeholder {
+      color: #60606b;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
     .category-chips {
       display: flex;
-      gap: 8px;
-      padding: 6px 18px 12px;
+      gap: 10px;
+      padding: 8px 20px 14px;
       overflow-x: auto;
       scrollbar-width: none;
     }
@@ -86,122 +181,198 @@
       display: none;
     }
     .chip {
-      padding: 6px 14px;
-      border-radius: 20px;
+      padding: 7px 16px;
+      border-radius: 30px;
       font-size: 12px;
       font-weight: 600;
-      background: rgba(30, 41, 59, 0.9);
-      color: #94a3b8;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      letter-spacing: 0.5px;
+      background: rgba(20, 20, 25, 0.75);
+      color: #a0a0ab;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       cursor: pointer;
       white-space: nowrap;
-      transition: all 0.2s;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
+    }
+    .chip:hover {
+      border-color: rgba(223, 186, 115, 0.3);
+      color: #dfba73;
     }
     .chip.active {
-      background: #0284c7;
-      color: #ffffff;
-      border-color: #38bdf8;
-      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+      background: linear-gradient(135deg, rgba(197, 155, 72, 0.25), rgba(120, 90, 25, 0.35));
+      color: #f7e3b5;
+      border: 1px solid rgba(223, 186, 115, 0.75);
+      box-shadow: 0 4px 15px rgba(197, 155, 72, 0.25);
     }
 
     .station-list {
       flex: 1;
-      padding: 6px 18px 130px;
+      padding: 4px 20px 145px;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 10px;
+      gap: 12px;
     }
-    @media (min-width: 600px) {
+    @media (min-width: 640px) {
       .station-list {
         grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
       }
     }
+    @media (min-width: 1024px) {
+      .station-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+    }
+
     .station-card {
-      background: rgba(30, 41, 59, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      padding: 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
       gap: 14px;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+    }
+    .station-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 3px; height: 100%;
+      background: transparent;
+      transition: background 0.25s;
+    }
+    .station-card:hover {
+      border-color: rgba(223, 186, 115, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
     }
     .station-card:active {
-      transform: scale(0.98);
-      background: rgba(51, 65, 85, 0.8);
+      transform: scale(0.985);
     }
     .station-card.playing {
-      border-color: #38bdf8;
-      background: rgba(14, 165, 233, 0.15);
-      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.15);
+      background: linear-gradient(135deg, rgba(28, 25, 20, 0.85) 0%, rgba(18, 17, 22, 0.9) 100%);
+      border: 1px solid rgba(223, 186, 115, 0.7);
+      box-shadow: 0 8px 30px rgba(197, 155, 72, 0.22);
     }
+    .station-card.playing::before {
+      background: var(--gold-gradient);
+    }
+
     .station-icon {
       width: 48px;
       height: 48px;
-      border-radius: 12px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      background: linear-gradient(135deg, #1e293b, #334155);
+      font-size: 23px;
+      background: linear-gradient(145deg, #1e1e24, #131317);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       flex-shrink: 0;
       position: relative;
+      transition: all 0.25s ease;
     }
     .station-card.playing .station-icon {
-      background: linear-gradient(135deg, #0284c7, #38bdf8);
-      animation: pulse 1.8s infinite ease-in-out;
+      border-color: rgba(223, 186, 115, 0.7);
+      background: linear-gradient(145deg, #2b2416, #1b160e);
+      box-shadow: 0 0 16px rgba(223, 186, 115, 0.35);
+      animation: pulseGold 2s infinite ease-in-out;
     }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5); }
-      50% { box-shadow: 0 0 0 8px rgba(56, 189, 248, 0); }
+    @keyframes pulseGold {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(223, 186, 115, 0.5); }
+      50% { box-shadow: 0 0 0 8px rgba(223, 186, 115, 0); }
     }
+
     .station-info {
       flex: 1;
       min-width: 0;
     }
     .station-name {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
-      color: #f1f5f9;
+      color: #fafafc;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: 0.3px;
+    }
+    .station-card.playing .station-name {
+      color: #f7e4be;
+    }
+    .station-genre {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .station-genre {
-      font-size: 12px;
-      color: #94a3b8;
-      margin-top: 3px;
-    }
     .badge-status {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.08);
-      color: #cbd5e1;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #7d7d8c;
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
     .station-card.playing .badge-status {
-      background: #0284c7;
-      color: white;
+      background: var(--gold-gradient);
+      color: #171206;
+      border: none;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(223, 186, 115, 0.3);
     }
 
-    /* Bottom Player */
+    /* Equalizer Bars Animation */
+    .eq-container {
+      display: none;
+      align-items: flex-end;
+      gap: 2px;
+      height: 14px;
+      margin-right: 4px;
+    }
+    .station-card.playing .eq-container {
+      display: inline-flex;
+    }
+    .eq-bar {
+      width: 2px;
+      background: #dfba73;
+      border-radius: 1px;
+      animation: eqBounce 1s infinite ease-in-out alternate;
+    }
+    .eq-bar:nth-child(1) { height: 5px; animation-duration: 0.6s; }
+    .eq-bar:nth-child(2) { height: 12px; animation-duration: 0.8s; }
+    .eq-bar:nth-child(3) { height: 8px; animation-duration: 0.5s; }
+    .eq-bar:nth-child(4) { height: 14px; animation-duration: 0.7s; }
+    @keyframes eqBounce {
+      0% { height: 3px; }
+      100% { height: 14px; }
+    }
+
+    /* Bottom Luxury Player Dock */
     .player-dock {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 12px 18px 20px;
-      z-index: 30;
-      box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.5);
+      background: rgba(10, 10, 13, 0.94);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid rgba(223, 186, 115, 0.25);
+      padding: 10px 22px 22px;
+      z-index: 35;
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.85);
     }
     .player-progress-bar {
-      height: 3px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 2px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.08);
       margin-bottom: 12px;
       overflow: hidden;
       position: relative;
@@ -209,16 +380,15 @@
     .player-progress-fill {
       height: 100%;
       width: 0%;
-      background: #38bdf8;
-      border-radius: 2px;
+      background: var(--gold-gradient);
       transition: width 0.3s;
     }
     .player-progress-fill.active {
       width: 100%;
-      animation: indeterminate 2s infinite linear;
-      background: linear-gradient(90deg, #0284c7, #38bdf8, #818cf8);
+      animation: indeterminateGold 1.8s infinite linear;
+      background: linear-gradient(90deg, #b88628, #dfba73, #fbe8ad, #b88628);
     }
-    @keyframes indeterminate {
+    @keyframes indeterminateGold {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
     }
@@ -226,7 +396,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
     }
     .player-track {
       flex: 1;
@@ -238,22 +408,25 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: #f8fafc;
+      color: #fafafc;
+      letter-spacing: 0.3px;
     }
     .player-track-sub {
-      font-size: 12px;
-      color: #38bdf8;
-      margin-top: 2px;
+      font-size: 11px;
+      color: #dfba73;
+      margin-top: 3px;
       display: flex;
       align-items: center;
       gap: 6px;
+      letter-spacing: 0.5px;
     }
     .live-dot {
-      width: 8px;
-      height: 8px;
-      background: #ef4444;
+      width: 7px;
+      height: 7px;
+      background: #e53e3e;
       border-radius: 50%;
       display: inline-block;
+      box-shadow: 0 0 10px #e53e3e;
       animation: blink 1s infinite alternate;
     }
     @keyframes blink {
@@ -263,58 +436,76 @@
     .controls {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
     .btn-control {
-      background: none;
-      border: none;
-      color: #f1f5f9;
-      font-size: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #e5e5ea;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      transition: 0.15s;
+      font-size: 16px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-control:hover {
+      border-color: rgba(223, 186, 115, 0.4);
+      color: #dfba73;
     }
     .btn-control:active {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(223, 186, 115, 0.15);
       transform: scale(0.92);
     }
     .btn-play {
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
-      background: linear-gradient(135deg, #0284c7, #38bdf8);
-      color: white;
-      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.5);
+      width: 52px;
+      height: 52px;
+      font-size: 22px;
+      background: var(--gold-gradient);
+      color: #120e06;
+      border: none;
+      box-shadow: 0 6px 20px rgba(197, 155, 72, 0.45);
+      transition: all 0.25s;
+    }
+    .btn-play:hover {
+      box-shadow: 0 8px 25px rgba(223, 186, 115, 0.65);
+      transform: scale(1.04);
+    }
+    .btn-play:active {
+      transform: scale(0.94);
     }
 
-    /* Modal Tambah Stesen */
+    /* Custom Add Station Banner */
     .add-station-banner {
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px dashed rgba(255, 255, 255, 0.2);
-      border-radius: 14px;
-      padding: 12px;
+      background: rgba(18, 18, 22, 0.5);
+      border: 1px dashed rgba(223, 186, 115, 0.25);
+      border-radius: 16px;
+      padding: 13px;
       text-align: center;
-      margin: 4px 18px 12px;
+      margin: 4px 20px 12px;
       cursor: pointer;
-      font-size: 13px;
-      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #c59b48;
+      transition: all 0.2s;
     }
     .add-station-banner:hover {
-      border-color: #38bdf8;
-      color: #38bdf8;
+      border-color: #dfba73;
+      background: rgba(197, 155, 72, 0.08);
+      color: #f7e3b5;
     }
+
+    /* Modal Styling */
     .modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       display: none;
       justify-content: center;
       align-items: center;
@@ -322,48 +513,59 @@
       padding: 20px;
     }
     .modal-card {
-      background: #1e293b;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
+      background: #141318;
+      border: 1px solid rgba(223, 186, 115, 0.35);
+      border-radius: 20px;
       width: 100%;
-      max-width: 360px;
-      padding: 20px;
+      max-width: 380px;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), var(--gold-glow);
     }
     .modal-card h3 {
-      margin-bottom: 14px;
-      font-size: 17px;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1.5px;
+      color: #f5dfb0;
+      font-size: 16px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
     }
     .modal-input {
       width: 100%;
-      padding: 10px 12px;
+      padding: 12px 14px;
       margin-bottom: 12px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: #0f172a;
+      border-radius: 10px;
+      border: 1px solid rgba(223, 186, 115, 0.2);
+      background: #0a0a0d;
       color: white;
       font-size: 13px;
+      outline: none;
+    }
+    .modal-input:focus {
+      border-color: #dfba73;
     }
     .modal-buttons {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       justify-content: flex-end;
-      margin-top: 10px;
+      margin-top: 14px;
     }
     .btn-action {
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 13px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
       border: none;
       cursor: pointer;
     }
     .btn-secondary {
-      background: #334155;
-      color: white;
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbcbce;
     }
     .btn-primary {
-      background: #0284c7;
-      color: white;
-      font-weight: 600;
+      background: var(--gold-gradient);
+      color: #120e06;
+      box-shadow: 0 4px 12px rgba(197, 155, 72, 0.35);
     }
   </style>
 </head>
@@ -371,30 +573,39 @@
 
   <header>
     <div class="logo-box">
-      <div class="logo-icon">📻</div>
+      <div class="crown-emblem">👑</div>
       <div>
-        <div class="logo-title">MyRadio Malaysia</div>
-        <div class="tagline">Audio Streaming Peribadi</div>
+        <div class="brand-title">MYRADIO ROYALE</div>
+        <div class="tagline">Exclusive Malaysian Broadcaster</div>
       </div>
     </div>
-    <div style="font-size: 12px; color: #38bdf8; font-weight: 600;" id="header-status">Siap</div>
+    <div class="vip-badge">
+      <span class="vip-dot"></span>
+      <span>VIP EDITION</span>
+    </div>
   </header>
 
+  <div class="exclusive-bar">
+    <span>💎 ULTRA HD LOSSLESS STREAM</span>
+    <span>🇲🇾 47 PREMIUM CHANNELS</span>
+  </div>
+
   <div class="search-box">
-    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari stesen radio...">
+    <span class="search-icon-pos">🔍</span>
+    <input type="text" id="searchInput" class="search-input" placeholder="Cari stesen radio eksklusif...">
   </div>
 
   <div class="category-chips">
-    <button class="chip active" onclick="filterCategory('semua')">Semua</button>
-    <button class="chip" onclick="filterCategory('popular')">⭐ Popular</button>
-    <button class="chip" onclick="filterCategory('negeri')">🇲🇾 Radio Negeri RTM</button>
-    <button class="chip" onclick="filterCategory('berita')">📰 Berita & Bual</button>
-    <button class="chip" onclick="filterCategory('islamik')">🕌 Islamik & Quran</button>
-    <button class="chip" onclick="filterCategory('muzik')">🎵 Muzik & Santai</button>
+    <button class="chip active" onclick="filterCategory('semua')">✦ Semua Saluran</button>
+    <button class="chip" onclick="filterCategory('popular')">👑 Paling Hangat</button>
+    <button class="chip" onclick="filterCategory('negeri')">🏛️ Radio Negeri RTM</button>
+    <button class="chip" onclick="filterCategory('berita')">📰 Berita & Analisis</button>
+    <button class="chip" onclick="filterCategory('islamik')">🕌 Santapan Rohani</button>
+    <button class="chip" onclick="filterCategory('muzik')">🎷 Lounge & Muzik</button>
   </div>
 
   <div class="add-station-banner" onclick="openAddModal()">
-    ➕ Tambah Stesen URL Sendiri
+    ✦ Tambah Stesen Persendirian (Custom Stream URL)
   </div>
 
   <div class="station-list" id="stationList">
@@ -408,16 +619,16 @@
     </div>
     <div class="player-inner">
       <div class="player-track">
-        <div class="player-track-name" id="currentTitle">Pilih Stesen Radio</div>
+        <div class="player-track-name" id="currentTitle">Pilih Stesen Siaran</div>
         <div class="player-track-sub" id="currentSubtitle">
           <span class="live-dot" style="display:none;" id="liveIndicator"></span>
-          <span id="statusText">Tekan stesen untuk main</span>
+          <span id="statusText">Sentuh mana-mana stesen untuk memainkan</span>
         </div>
       </div>
       <div class="controls">
-        <button class="btn-control" onclick="playPrev()" title="Sebelumnya">⏮️</button>
-        <button class="btn-control btn-play" id="btnPlayPause" onclick="togglePlay()">▶️</button>
-        <button class="btn-control" onclick="playNext()" title="Seterusnya">⏭️</button>
+        <button class="btn-control" onclick="playPrev()" title="Sebelumnya">⏮</button>
+        <button class="btn-control btn-play" id="btnPlayPause" onclick="togglePlay()">▶</button>
+        <button class="btn-control" onclick="playNext()" title="Seterusnya">⏭</button>
       </div>
     </div>
   </div>
@@ -426,12 +637,12 @@
   <div class="modal-overlay" id="addModal">
     <div class="modal-card">
       <h3>Tambah Stesen Baharu</h3>
-      <input type="text" id="newStationName" class="modal-input" placeholder="Nama Stesen (cth: Era FM)">
+      <input type="text" id="newStationName" class="modal-input" placeholder="Nama Stesen (cth: Suria FM)">
       <input type="text" id="newStationCategory" class="modal-input" placeholder="Kategori (popular / muzik / islamik)">
       <input type="text" id="newStationUrl" class="modal-input" placeholder="URL Stream (mp3 / aac / m3u8)">
       <div class="modal-buttons">
         <button class="btn-action btn-secondary" onclick="closeAddModal()">Batal</button>
-        <button class="btn-action btn-primary" onclick="saveNewStation()">Simpan</button>
+        <button class="btn-action btn-primary" onclick="saveNewStation()">Simpan Stesen</button>
       </div>
     </div>
   </div>
@@ -439,7 +650,6 @@
   <audio id="audioPlayer" preload="none"></audio>
 
   <script>
-    // Senarai stesen radio Malaysia lengkap & live stream
     const DEFAULT_STATIONS = [
   {
     "id": "hotfm",
@@ -866,7 +1076,6 @@
   }
 ];
 
-    // Gabungkan senarai DEFAULT dengan mana-mana stesen kustom pengguna
     const customUserStations = JSON.parse(localStorage.getItem('myradio_user_added')) || [];
     let stations = [...customUserStations, ...DEFAULT_STATIONS];
     let currentIndex = -1;
@@ -882,7 +1091,6 @@
     const statusText = document.getElementById('statusText');
     const liveIndicator = document.getElementById('liveIndicator');
     const playerProgress = document.getElementById('playerProgress');
-    const headerStatus = document.getElementById('headerStatus');
 
     function renderStations() {
       stationList.innerHTML = '';
@@ -895,7 +1103,7 @@
       });
 
       if (filtered.length === 0) {
-        stationList.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 40px 0;">Tiada stesen dijumpai.</div>';
+        stationList.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #71717a; padding: 50px 0; font-size: 13px;">Tiada stesen dijumpai.</div>';
         return;
       }
 
@@ -903,7 +1111,7 @@
         const actualIndex = stations.findIndex(item => item.id === st.id);
         const isCurrent = actualIndex === currentIndex;
         const card = document.createElement('div');
-        card.className = `station-card ${isCurrent && isPlaying ? 'playing' : ''}`;
+        card.className = 'station-card ' + (isCurrent && isPlaying ? 'playing' : '');
         card.onclick = () => selectStation(actualIndex);
 
         card.innerHTML = `
@@ -912,7 +1120,15 @@
             <div class="station-name">${st.name}</div>
             <div class="station-genre">${st.genre}</div>
           </div>
-          <div class="badge-status">${isCurrent && isPlaying ? 'PLAYING' : 'READY'}</div>
+          <div style="display:flex; align-items:center;">
+            <div class="eq-container">
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+            </div>
+            <div class="badge-status">${isCurrent && isPlaying ? 'LIVE ON AIR' : 'PREMIUM'}</div>
+          </div>
         `;
         stationList.appendChild(card);
       });
@@ -924,7 +1140,7 @@
       const st = stations[currentIndex];
 
       currentTitle.innerText = st.name;
-      statusText.innerText = "Menyambung stream...";
+      statusText.innerText = "Menghubungkan ke Audio Stream...";
       liveIndicator.style.display = "inline-block";
       playerProgress.classList.add('active');
 
@@ -933,7 +1149,6 @@
         hls = null;
       }
 
-      // Check if HLS (.m3u8)
       if (st.url.includes('.m3u8') || st.type === 'hls') {
         if (Hls.isSupported()) {
           hls = new Hls({
@@ -947,17 +1162,15 @@
           });
           hls.on(Hls.Events.ERROR, (event, data) => {
             if (data.fatal) {
-              statusText.innerText = "Gagal sambung stream.";
+              statusText.innerText = "Gagal menyambung siaran stream.";
               playerProgress.classList.remove('active');
             }
           });
         } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
-          // Native Safari / iOS HLS
           audio.src = st.url;
           audio.play().catch(e => console.log(e));
         }
       } else {
-        // Standard Direct Stream (MP3 / AAC)
         audio.src = st.url;
         audio.play().catch(e => console.log(e));
       }
@@ -990,41 +1203,39 @@
       selectStation(prev);
     }
 
-    // Audio Event Handlers
     audio.addEventListener('playing', () => {
       isPlaying = true;
-      btnPlay.innerText = '⏸️';
-      statusText.innerText = "Sedang Dimainkan (Live)";
+      btnPlay.innerText = '⏸';
+      statusText.innerText = "Sedang Bersiaran Secara Langsung";
       playerProgress.classList.remove('active');
       renderStations();
     });
 
     audio.addEventListener('pause', () => {
       isPlaying = false;
-      btnPlay.innerText = '▶️';
-      statusText.innerText = "Dijeda (Paused)";
+      btnPlay.innerText = '▶';
+      statusText.innerText = "Siaran Dijeda";
       playerProgress.classList.remove('active');
       renderStations();
     });
 
     audio.addEventListener('waiting', () => {
-      statusText.innerText = "Buffering...";
+      statusText.innerText = "Buffering Audio HD...";
       playerProgress.classList.add('active');
     });
 
     audio.addEventListener('error', () => {
-      statusText.innerText = "Ralat memainkan audio.";
+      statusText.innerText = "Ralat sambungan stream.";
       playerProgress.classList.remove('active');
       isPlaying = false;
-      btnPlay.innerText = '▶️';
+      btnPlay.innerText = '▶';
     });
 
-    // Android Lockscreen / Notification integration (Media Session API)
     function updateMediaSession(station) {
       if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
           title: station.name,
-          artist: "MyRadio Malaysia",
+          artist: "MyRadio Royale VIP",
           album: station.genre,
           artwork: [
             { src: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=512&auto=format&fit=crop&q=80', sizes: '512x512', type: 'image/jpeg' }
@@ -1038,7 +1249,6 @@
       }
     }
 
-    // Filter & Search
     function filterCategory(cat) {
       currentFilter = cat;
       document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
@@ -1048,7 +1258,6 @@
 
     document.getElementById('searchInput').addEventListener('input', renderStations);
 
-    // Modal Custom Station
     function openAddModal() {
       document.getElementById('addModal').style.display = 'flex';
     }
@@ -1068,9 +1277,9 @@
       const newSt = {
         id: "custom_" + Date.now(),
         name: name,
-        genre: "Stesen Tambahan Anda",
+        genre: "Stesen Peribadi Eksklusif",
         category: category.toLowerCase(),
-        icon: "📻",
+        icon: "👑",
         url: url,
         type: url.includes('.m3u8') ? 'hls' : 'audio'
       };
@@ -1083,14 +1292,12 @@
       selectStation(0);
     }
 
-    // Register PWA Service Worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js')
         .then(() => console.log('PWA Service Worker didaftarkan.'))
         .catch(err => console.log('SW Error:', err));
     }
 
-    // First load
     renderStations();
   </script>
 </body>
