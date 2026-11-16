@@ -387,8 +387,9 @@
   <div class="category-chips">
     <button class="chip active" onclick="filterCategory('semua')">Semua</button>
     <button class="chip" onclick="filterCategory('popular')">⭐ Popular</button>
+    <button class="chip" onclick="filterCategory('negeri')">🇲🇾 Radio Negeri RTM</button>
     <button class="chip" onclick="filterCategory('berita')">📰 Berita & Bual</button>
-    <button class="chip" onclick="filterCategory('islamik')">🕌 Islamik & Al-Quran</button>
+    <button class="chip" onclick="filterCategory('islamik')">🕌 Islamik & Quran</button>
     <button class="chip" onclick="filterCategory('muzik')">🎵 Muzik & Santai</button>
   </div>
 
@@ -438,137 +439,382 @@
   <audio id="audioPlayer" preload="none"></audio>
 
   <script>
-    // Senarai stesen siap sedia (Live verified streaming URLs)
+    // Senarai stesen radio Malaysia lengkap & live stream
     const DEFAULT_STATIONS = [
       {
-        id: "hotfm",
-        name: "Hot FM",
-        genre: "Muzik Hangat & Hiburan",
-        category: "popular",
-        icon: "🔥",
-        url: "https://stream.rcs.revma.com/drakdf8mtd3vv/hls.m3u8",
-        type: "hls"
+            "id": "hotfm",
+            "name": "Hot FM",
+            "genre": "Yang Hangat dan Terkini",
+            "category": "popular",
+            "icon": "\ud83d\udd25",
+            "url": "https://stream.rcs.revma.com/drakdf8mtd3vv",
+            "type": "audio"
       },
       {
-        id: "sinarfm",
-        name: "Sinar FM",
-        genre: "Menyinari Hidupmu (Lagu Klasik & Retro)",
-        category: "popular",
-        icon: "☀️",
-        url: "https://stream.rcs.revma.com/azatk0tbv4uvv",
-        type: "audio"
+            "id": "sinarfm",
+            "name": "Sinar FM",
+            "genre": "Menyinari Hidupmu (Retro & Klasik)",
+            "category": "popular",
+            "icon": "\u2600\ufe0f",
+            "url": "https://stream.rcs.revma.com/azatk0tbv4uvv",
+            "type": "audio"
       },
       {
-        id: "flyfm",
-        name: "Fly FM",
-        genre: "Today's Hottest Hits",
-        category: "popular",
-        icon: "🦅",
-        url: "https://stream.rcs.revma.com/q17aka9mtd3vv",
-        type: "audio"
+            "id": "hitzfm",
+            "name": "Hitz FM",
+            "genre": "Malaysia's #1 Hit Music Station",
+            "category": "popular",
+            "icon": "\ud83c\udfb6",
+            "url": "https://stream.rcs.revma.com/488kt4sbv4uvv",
+            "type": "audio"
       },
       {
-        id: "kool101",
-        name: "Kool 101",
-        genre: "Muzik & Info Terkini",
-        category: "berita",
-        icon: "🎙️",
-        url: "https://stream.rcs.revma.com/3930238mtd3vv/hls.m3u8",
-        type: "hls"
+            "id": "flyfm",
+            "name": "Fly FM",
+            "genre": "Today's Hottest Hits & Trend",
+            "category": "popular",
+            "icon": "\ud83e\udd85",
+            "url": "https://stream.rcs.revma.com/q17aka9mtd3vv",
+            "type": "audio"
       },
       {
-        id: "litefm",
-        name: "Lite FM",
-        genre: "Relaxing Favorites & Easy Listening",
-        category: "muzik",
-        icon: "☕",
-        url: "https://stream.rcs.revma.com/bn4ex8sbv4uvv",
-        type: "audio"
+            "id": "kool101",
+            "name": "Kool 101",
+            "genre": "Suara Semasa & Muzik Berkualiti",
+            "category": "berita",
+            "icon": "\ud83c\udf99\ufe0f",
+            "url": "https://stream.rcs.revma.com/3930238mtd3vv",
+            "type": "audio"
       },
       {
-        id: "myfm",
-        name: "MY FM",
-        genre: "Muzik Pop & Hiburan Cina",
-        category: "popular",
-        icon: "🎧",
-        url: "https://stream.rcs.revma.com/hc3unrtbv4uvv/hls.m3u8",
-        type: "hls"
+            "id": "litefm",
+            "name": "Lite FM",
+            "genre": "Relaxing Favorites & Easy Listening",
+            "category": "muzik",
+            "icon": "\u2615",
+            "url": "https://stream.rcs.revma.com/bn4ex8sbv4uvv",
+            "type": "audio"
       },
       {
-        id: "988fm",
-        name: "988 FM",
-        genre: "Berita & Muzik Cina Malaysia",
-        category: "popular",
-        icon: "📻",
-        url: "https://28103.live.streamtheworld.com/988_FMAAC.aac",
-        type: "audio"
+            "id": "mixfm",
+            "name": "MIX FM",
+            "genre": "The Best Music from Yesterday & Today",
+            "category": "muzik",
+            "icon": "\ud83d\udcfb",
+            "url": "https://stream.rcs.revma.com/v5pq3htbv4uvv",
+            "type": "audio"
       },
       {
-        id: "radioklasik",
-        name: "Radio Klasik RTM",
-        genre: "Menggamit Kenangan Lagu Abadi",
-        category: "muzik",
-        icon: "📻",
-        url: "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_KLASIK.mp3",
-        type: "audio"
+            "id": "myfm",
+            "name": "MY FM",
+            "genre": "Muzik Pop & Hiburan Cina Terkini",
+            "category": "popular",
+            "icon": "\ud83c\udfa7",
+            "url": "https://stream.rcs.revma.com/hc3unrtbv4uvv",
+            "type": "audio"
       },
       {
-        id: "nasionalfm",
-        name: "Nasional FM RTM",
-        genre: "Sentiasa di Hati & Berita Terkini",
-        category: "berita",
-        icon: "🇲🇾",
-        url: "http://playerservices.streamtheworld.com/api/livestream-redirect/NASIONAL_FM.mp3",
-        type: "audio"
+            "id": "melodyfm",
+            "name": "Melody FM",
+            "genre": "Lagu Emas Cina & Sentuhan Klasik",
+            "category": "muzik",
+            "icon": "\ud83c\udfb5",
+            "url": "https://stream.rcs.revma.com/2u1n6dtbv4uvv",
+            "type": "audio"
       },
       {
-        id: "bfm",
-        name: "BFM 89.9",
-        genre: "The Business Station (News & Talks)",
-        category: "berita",
-        icon: "💼",
-        url: "https://22253.live.streamtheworld.com/BFM_SC",
-        type: "audio"
+            "id": "goxuan",
+            "name": "GOXUAN",
+            "genre": "Muzik Trend & Gaya Hidup Generasi Baharu",
+            "category": "popular",
+            "icon": "\ud83d\ude80",
+            "url": "https://stream.rcs.revma.com/xt9nhzsbv4uvv",
+            "type": "audio"
       },
       {
-        id: "ikimfm",
-        name: "IKIM FM",
-        genre: "Pilihan Utama Anda (Islamik)",
-        category: "islamik",
-        icon: "🕌",
-        url: "https://stream.rcs.revma.com/kz3pdu9wz2nwv/hls.m3u8",
-        type: "hls"
+            "id": "raaga",
+            "name": "Raaga FM",
+            "genre": "Malaysia's #1 Tamil Radio Station",
+            "category": "popular",
+            "icon": "\ud83e\ude95",
+            "url": "https://n06.rcs.revma.com/1ut6qwtbv4uvv",
+            "type": "audio"
       },
       {
-        id: "quranmakkah",
-        name: "Radio Quran Makkah 24 Jam",
-        genre: "Bacaan Ayat Suci Al-Quran Bersambung",
-        category: "islamik",
-        icon: "📖",
-        url: "https://qurango.net/radio/salma",
-        type: "audio"
+            "id": "zayan",
+            "name": "Zayan FM",
+            "genre": "Indah Di Hati (Gaya Hidup Muslim Moden)",
+            "category": "islamik",
+            "icon": "\ud83c\udf19",
+            "url": "https://stream.rcs.revma.com/7ww2a4tbv4uvv",
+            "type": "audio"
       },
       {
-        id: "slowrock",
-        name: "Slow Rock 90's",
-        genre: "Kompilasi Lagu Rock Klasik & Balada",
-        category: "muzik",
-        icon: "🎸",
-        url: "https://stream.zeno.fm/hiut6cwfoneuv",
-        type: "audio"
+            "id": "eightfm",
+            "name": "Eight 8FM (\u65e0\u9650)",
+            "genre": "Radio Bahasa Cina Dinamik",
+            "category": "popular",
+            "icon": "\ud83c\udfb1",
+            "url": "https://stream.rcs.revma.com/qp0xrd9mtd3vv",
+            "type": "audio"
       },
       {
-        id: "jazzlounge",
-        name: "Jazz Lounge",
-        genre: "Muzik Jazz Santai Coffee Shop",
-        category: "muzik",
-        icon: "🎷",
-        url: "http://eu8.fastcast4u.com:5068/;",
-        type: "audio"
+            "id": "988fm",
+            "name": "988 FM",
+            "genre": "Berita & Muzik Cina Malaysia",
+            "category": "popular",
+            "icon": "\ud83d\udcfb",
+            "url": "https://28103.live.streamtheworld.com/988_FMAAC.aac",
+            "type": "audio"
+      },
+      {
+            "id": "bfm",
+            "name": "BFM 89.9",
+            "genre": "The Business Station (News, Talks & Economy)",
+            "category": "berita",
+            "icon": "\ud83d\udcbc",
+            "url": "https://22253.live.streamtheworld.com/BFM_SC",
+            "type": "audio"
+      },
+      {
+            "id": "cityplus",
+            "name": "CITYPlus FM",
+            "genre": "Info Bisnes & Pasaran Modal (Mandarin)",
+            "category": "berita",
+            "icon": "\ud83c\udfd9\ufe0f",
+            "url": "https://stream.rcs.revma.com/9ykdmcawe1bwv",
+            "type": "audio"
+      },
+      {
+            "id": "catsfm",
+            "name": "Cats FM (Sarawak)",
+            "genre": "Nang Antap! Muzik & Info Tempatan Sarawak",
+            "category": "popular",
+            "icon": "\ud83d\udc31",
+            "url": "https://stream.rcs.revma.com/51qe53rv0y3vv.m4a",
+            "type": "audio"
+      },
+      {
+            "id": "ikimfm",
+            "name": "IKIM FM",
+            "genre": "Pilihan Utama Anda (Kefahaman Islam)",
+            "category": "islamik",
+            "icon": "\ud83d\udd4c",
+            "url": "https://stream.rcs.revma.com/kz3pdu9wz2nwv",
+            "type": "audio"
+      },
+      {
+            "id": "quranmakkah",
+            "name": "Radio Quran Makkah 24 Jam",
+            "genre": "Bacaan Ayat Suci Al-Quran Bersambung",
+            "category": "islamik",
+            "icon": "\ud83d\udcd6",
+            "url": "https://qurango.net/radio/salma",
+            "type": "audio"
+      },
+      {
+            "id": "radioklasik",
+            "name": "Radio Klasik RTM",
+            "genre": "Menggamit Kenangan Lagu Abadi Melayu",
+            "category": "muzik",
+            "icon": "\ud83d\udcfb",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_KLASIK.mp3",
+            "type": "audio"
+      },
+      {
+            "id": "nasionalfm",
+            "name": "Nasional FM RTM",
+            "genre": "Sentiasa di Hati & Liputan Berita Negara",
+            "category": "berita",
+            "icon": "\ud83c\uddf2\ud83c\uddfe",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/NASIONAL_FM.mp3",
+            "type": "audio"
+      },
+      {
+            "id": "traxxfm",
+            "name": "Traxx FM RTM",
+            "genre": "Travel 'N' Music (English National Station)",
+            "category": "berita",
+            "icon": "\ud83c\udf10",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/TRAXX_FMAAC_SC",
+            "type": "audio"
+      },
+      {
+            "id": "aifm",
+            "name": "Ai FM RTM",
+            "genre": "Stesen Bahasa Mandarin Kebangsaan RTM",
+            "category": "popular",
+            "icon": "\ud83c\udde8\ud83c\uddf3",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/AI_FMAAC_SC",
+            "type": "audio"
+      },
+      {
+            "id": "minnalfm",
+            "name": "Minnal FM RTM",
+            "genre": "Stesen Bahasa Tamil Kebangsaan RTM",
+            "category": "popular",
+            "icon": "\ud83c\uddee\ud83c\uddf3",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/MINNAL_FMAAC_SC",
+            "type": "audio"
+      },
+      {
+            "id": "asyikfm",
+            "name": "Asyik FM RTM",
+            "genre": "Moi Num Moi Mai (Suara Warisan Pribumi)",
+            "category": "muzik",
+            "icon": "\ud83c\udf3f",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/ASYIK_FM.mp3",
+            "type": "audio"
+      },
+      {
+            "id": "kelantanfm",
+            "name": "Kelantan FM RTM",
+            "genre": "Peneraju Utama Siaran Pantai Timur",
+            "category": "negeri",
+            "icon": "\ud83d\udd34",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/KELANTAN_FMAAC.aac",
+            "type": "audio"
+      },
+      {
+            "id": "terengganufm",
+            "name": "Terengganu FM RTM",
+            "genre": "Santai Molek, Info Kemah Keming",
+            "category": "negeri",
+            "icon": "\u26aa",
+            "url": "https://22243.live.streamtheworld.com/TERENGGANU_FMAAC_SC",
+            "type": "audio"
+      },
+      {
+            "id": "pahangfm",
+            "name": "Pahang FM RTM",
+            "genre": "Suara Tok Gajah, Maklumat & Inspirasi",
+            "category": "negeri",
+            "icon": "\ud83d\udc18",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/PAHANG_FMAAC.aac",
+            "type": "audio"
+      },
+      {
+            "id": "sabahfm",
+            "name": "Sabah FM RTM",
+            "genre": "Bagus Bah! Suara Komuniti Negeri Di Bawah Bayu",
+            "category": "negeri",
+            "icon": "\ud83c\udf3a",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/SABAH_FMAAC.aac",
+            "type": "audio"
+      },
+      {
+            "id": "sarawakfm",
+            "name": "Sarawak FM RTM",
+            "genre": "Sehati Sejiwa Dari Bumi Kenyalang",
+            "category": "negeri",
+            "icon": "\ud83e\udda4",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/SARAWAK_FMAAC.aac",
+            "type": "audio"
+      },
+      {
+            "id": "langkawifm",
+            "name": "Langkawi FM RTM",
+            "genre": "Suara Pulau Bebas Cukai & Percutian",
+            "category": "negeri",
+            "icon": "\ud83c\udfdd\ufe0f",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/LANGKAWI_FM.mp3",
+            "type": "audio"
+      },
+      {
+            "id": "keningaufm",
+            "name": "Keningau FM RTM",
+            "genre": "Suara Pedalaman Sabah Nan Harmoni",
+            "category": "negeri",
+            "icon": "\ud83c\udfde\ufe0f",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/KENINGAU_FM.mp3",
+            "type": "audio"
+      },
+      {
+            "id": "waifmiban",
+            "name": "WAI FM Iban RTM",
+            "genre": "Siaran Bahasa Iban Sarawak",
+            "category": "negeri",
+            "icon": "\ud83c\udf3e",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/WAI_FM_IBAN.mp3",
+            "type": "audio"
+      },
+      {
+            "id": "waifmbidayuh",
+            "name": "WAI FM Bidayuh RTM",
+            "genre": "Siaran Bahasa Bidayuh Sarawak",
+            "category": "negeri",
+            "icon": "\ud83c\udf8b",
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/WAI_FM_BK.mp3",
+            "type": "audio"
+      },
+      {
+            "id": "radiorosak",
+            "name": "Radio Rosak",
+            "genre": "Muzik Indie, Underground & Alternatif Tempatan",
+            "category": "muzik",
+            "icon": "\u26a1",
+            "url": "https://radiorosak.radioca.st/stream",
+            "type": "audio"
+      },
+      {
+            "id": "slowrock",
+            "name": "Slow Rock 90's",
+            "genre": "Kompilasi Lagu Rock Kapak & Balada Klasik",
+            "category": "muzik",
+            "icon": "\ud83c\udfb8",
+            "url": "https://stream.zeno.fm/hiut6cwfoneuv",
+            "type": "audio"
+      },
+      {
+            "id": "jazzlounge",
+            "name": "Jazz Lounge",
+            "genre": "Muzik Jazz Santai & Ketenangan Jiwa",
+            "category": "muzik",
+            "icon": "\ud83c\udfb7",
+            "url": "http://eu8.fastcast4u.com:5068/;",
+            "type": "audio"
+      },
+      {
+            "id": "gegarmuzik",
+            "name": "Gegar Muzik FM",
+            "genre": "Hiburan Muzik Dangdut, Melayu & Pop",
+            "category": "muzik",
+            "icon": "\ud83d\udc83",
+            "url": "https://usa3.fastcast4u.com/proxy/gegarmuzikfm?mp=/1",
+            "type": "audio"
+      },
+      {
+            "id": "gemersikfm",
+            "name": "Gemersik FM",
+            "genre": "Sentuhan Muzik Retro & Melodi Rindu",
+            "category": "muzik",
+            "icon": "\ud83d\udcfb",
+            "url": "http://gemersikfm.iradio.work:8000/;",
+            "type": "audio"
+      },
+      {
+            "id": "impianfm",
+            "name": "Impian FM",
+            "genre": "Hiburan Lagu Melayu Nostalgia",
+            "category": "muzik",
+            "icon": "\u2728",
+            "url": "http://167.114.131.90:6156/stream/1/",
+            "type": "audio"
+      },
+      {
+            "id": "radiokpkt",
+            "name": "Radio KPKT",
+            "genre": "Saluran Maklumat Kerajaan & Komuniti",
+            "category": "berita",
+            "icon": "\ud83d\udce2",
+            "url": "http://listen.kpkt.gov.my:8000/stream",
+            "type": "audio"
       }
-    ];
+];
 
-    let stations = JSON.parse(localStorage.getItem('myradio_custom_stations')) || DEFAULT_STATIONS;
+    // Gabungkan senarai DEFAULT dengan mana-mana stesen kustom pengguna
+    const customUserStations = JSON.parse(localStorage.getItem('myradio_user_added')) || [];
+    let stations = [...customUserStations, ...DEFAULT_STATIONS];
     let currentIndex = -1;
     let isPlaying = false;
     let hls = null;
@@ -776,7 +1022,8 @@
       };
 
       stations.unshift(newSt);
-      localStorage.setItem('myradio_custom_stations', JSON.stringify(stations));
+      customUserStations.unshift(newSt);
+      localStorage.setItem('myradio_user_added', JSON.stringify(customUserStations));
       closeAddModal();
       renderStations();
       selectStation(0);
