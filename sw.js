@@ -1,4 +1,4 @@
-const CACHE_NAME = 'myradio-cache-v3';
+const CACHE_NAME = 'myradio-cache-v4';
 const ASSETS = [
   './index.html',
   './manifest.json',
