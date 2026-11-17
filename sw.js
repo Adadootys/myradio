@@ -1,13 +1,11 @@
-const CACHE_NAME = 'myradio-cache-v1';
+const CACHE_NAME = 'myradio-cache-v2';
 const ASSETS = [
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './stations.js'
 ];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
-  );
   self.skipWaiting();
 });
 
@@ -15,9 +13,7 @@ self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.map((k) => {
-          if (k !== CACHE_NAME) return caches.delete(k);
-        })
+        keys.map((k) => caches.delete(k))
       );
     })
   );
@@ -25,11 +21,17 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  // Biarkan network stream direct tanpa cache audio streaming
   if (e.request.url.includes('.mp3') || e.request.url.includes('.aac') || e.request.url.includes('.m3u8') || e.request.url.includes('stream')) {
     return;
   }
+  // Network first supaya sentiasa dapat update terkini
   e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
+    fetch(e.request)
+      .then((response) => {
+        const cloned = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(e.request, cloned));
+        return response;
+      })
+      .catch(() => caches.match(e.request))
   );
 });
