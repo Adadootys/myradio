@@ -782,6 +782,7 @@
     <button class="chip" onclick="filterCategory('popular')">👑 Paling Hangat</button>
     <button class="chip" onclick="filterCategory('negeri')">🏛️ Radio Negeri RTM</button>
     <button class="chip" onclick="filterCategory('berita')">📰 Berita & Analisis</button>
+    <button class="chip" onclick="filterCategory('raya')" style="border-color: #dfba73; background: rgba(223, 186, 115, 0.15);">🎉 Khas Lagu Raya</button>
     <button class="chip" onclick="filterCategory('islamik')">🕌 Santapan Rohani</button>
     <button class="chip" onclick="filterCategory('muzik')">🎷 Lounge & Muzik</button>
   </div>
@@ -833,6 +834,105 @@
 
   <script>
     const DEFAULT_STATIONS = [
+{
+    "id": "raya_sudirman_inang",
+    "name": "Sudirman & Zaleha Hamid \u2014 Inang Di Aidilfitri",
+    "genre": "Klasik Evergreen Raya",
+    "category": "raya",
+    "icon": "\ud83c\udf89",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/SUDIRMAN-ZALEHA%20HAMID-InangDiAidilfitri.mp3",
+    "type": "audio"
+},
+{
+    "id": "raya_siti_suaratakbir",
+    "name": "Dato' Sri Siti Nurhaliza \u2014 Suara Takbir",
+    "genre": "Nostalgia Raya Terhebat",
+    "category": "raya",
+    "icon": "\u2728",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/SitiNurhaliza-SuaraTakbir.mp3",
+    "type": "audio"
+},
+{
+    "id": "raya_zainal_dendang",
+    "name": "Zainal Abidin \u2014 Dendang Perantau",
+    "genre": "Syahdu Aidilfitri Rantau",
+    "category": "raya",
+    "icon": "\ud83c\udf19",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/Zainal_Abidin_-_Dendang_Perantau.mp3",
+    "type": "audio"
+},
+{
+    "id": "raya_aishah_maklimah",
+    "name": "Aishah \u2014 Lenggang Mak Limah",
+    "genre": "Ria Ceria Hari Raya",
+    "category": "raya",
+    "icon": "\ud83c\udf8a",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/Aishah-LenggangMakLimah.mp3",
+    "type": "audio"
+},
+{
+    "id": "raya_siti_meriah",
+    "name": "Dato' Sri Siti Nurhaliza \u2014 Meriah Suasana Hari Raya",
+    "genre": "Pop Ceria Aidilfitri",
+    "category": "raya",
+    "icon": "\ud83c\udf1f",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/SitiNurhaliza-MeriahSuasanaHariRaya.mp3",
+    "type": "audio"
+},
+{
+    "id": "raya_jamal_salam",
+    "name": "Jamal Abdillah \u2014 Salam Aidilfitri",
+    "genre": "Klasik Vokal Emas Raya",
+    "category": "raya",
+    "icon": "\ud83d\udd4c",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/JamalAbdillah-SalamAidilfitri.mp3",
+    "type": "audio"
+},
+{
+    "id": "raya_sanisah_joget",
+    "name": "Sanisah Huri \u2014 Joget Aidilfitri",
+    "genre": "Joget Tradisi Hari Raya",
+    "category": "raya",
+    "icon": "\ud83c\udfb6",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/SanisahHuri-JogetAidilfitri.mp3",
+    "type": "audio"
+},
+{
+    "id": "raya_aramlie_suaratakbir",
+    "name": "A. Ramlie \u2014 Suara Takbir",
+    "genre": "Evergreen Nostalgia 60-an",
+    "category": "raya",
+    "icon": "\ud83d\udcfb",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/A.Ramlie-SuaraTakbir.mp3",
+    "type": "audio"
+},
+{
+    "id": "raya_wann_selamatlebaran",
+    "name": "Wann \u2014 Selamat Hari Lebaran",
+    "genre": "Suasana Lebaran Manis",
+    "category": "raya",
+    "icon": "\ud83c\udf3a",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/Wann-SelamatHariLebaran.mp3",
+    "type": "audio"
+},
+{
+    "id": "raya_sjibeng_musafir",
+    "name": "S. Jibeng \u2014 Musafir Di Aidilfitri",
+    "genre": "Nostalgia Syahdu Menggamit Jiwa",
+    "category": "raya",
+    "icon": "\ud83d\udd4a\ufe0f",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/SJibeng-MusafirdiAidilfitri.mp3",
+    "type": "audio"
+},
+{
+    "id": "raya_takbir_full",
+    "name": "Gema Takbir Raya Aidilfitri (Lengkap)",
+    "genre": "Alunan Takbir Hari Raya",
+    "category": "raya",
+    "icon": "\ud83d\udd4b",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/TAKBIRRAYAFULL.mp3",
+    "type": "audio"
+},
   {
     "id": "hotfm",
     "name": "Hot FM",
