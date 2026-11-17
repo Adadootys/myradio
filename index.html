@@ -567,6 +567,124 @@
       color: #120e06;
       box-shadow: 0 4px 12px rgba(197, 155, 72, 0.35);
     }
+
+    /* Waktu Jam & Waktu Solat Royale Widget */
+    .prayer-widget {
+      margin: 12px 18px 8px 18px;
+      background: linear-gradient(145deg, rgba(26, 23, 32, 0.95), rgba(12, 12, 16, 0.95));
+      border: 1px solid rgba(223, 186, 115, 0.35);
+      border-radius: 18px;
+      padding: 14px 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.06);
+    }
+    .prayer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .clock-time {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      font-family: 'Cinzel', monospace, serif;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+    .clock-date {
+      font-size: 11px;
+      color: #b3b3be;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .hijri-date {
+      font-size: 10px;
+      color: var(--gold-1);
+      font-weight: 600;
+    }
+    .zone-selector-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+    .zone-select {
+      background: rgba(10, 10, 14, 0.85);
+      border: 1px solid rgba(223, 186, 115, 0.35);
+      color: #f2e2be;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 8px;
+      border-radius: 8px;
+      outline: none;
+      cursor: pointer;
+      max-width: 145px;
+    }
+    .zone-select option {
+      background: #141318;
+      color: #fff;
+    }
+    .solat-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+    }
+    .solat-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(223, 186, 115, 0.12);
+      border-radius: 10px;
+      padding: 8px 4px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .solat-item.current-solat {
+      background: rgba(197, 155, 72, 0.22);
+      border-color: rgba(223, 186, 115, 0.65);
+      box-shadow: 0 0 12px rgba(223, 186, 115, 0.3);
+      transform: translateY(-2px);
+    }
+    .solat-name {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #8f8f9c;
+      margin-bottom: 3px;
+    }
+    .solat-item.current-solat .solat-name {
+      color: #dfba73;
+    }
+    .solat-time {
+      font-size: 11px;
+      font-weight: 700;
+      color: #f5f5f7;
+      font-family: 'Plus Jakarta Sans', monospace;
+    }
+    .next-solat-banner {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(223, 186, 115, 0.18);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+    }
+    .next-solat-badge {
+      color: #e4c98e;
+      font-weight: 600;
+    }
+    .solat-countdown {
+      background: rgba(223, 186, 115, 0.15);
+      border: 1px solid rgba(223, 186, 115, 0.3);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+      color: #fbe8ad;
+      font-size: 10.5px;
+    }
+
   </style>
 </head>
 <body>
@@ -588,6 +706,70 @@
   <div class="exclusive-bar">
     <span>💎 ULTRA HD LOSSLESS STREAM</span>
     <span>🇲🇾 47 PREMIUM CHANNELS</span>
+  </div>
+
+
+  <!-- Waktu Jam & Waktu Solat Malaysia Widget -->
+  <div class="prayer-widget">
+    <div class="prayer-header">
+      <div>
+        <div class="clock-time" id="liveClock">--:--:--</div>
+        <div class="clock-date" id="liveCalendar">Memuat tarikh...</div>
+        <div class="hijri-date" id="hijriCalendar">-- Hijrah</div>
+      </div>
+      <div class="zone-selector-box">
+        <span style="font-size: 9.5px; color: #8e8e98; text-transform: uppercase; letter-spacing: 0.5px;">Zon Malaysia (JAKIM)</span>
+        <select id="solatZoneSelect" class="zone-select" onchange="changeSolatZone(this.value)">
+          <option value="WLY01">KL & Putrajaya</option>
+          <option value="SGR01">Gombak, Petaling, Sepang</option>
+          <option value="JHR02">Johor Bahru & Kulai</option>
+          <option value="PNG01">Seluruh Pulau Pinang</option>
+          <option value="PRK02">Ipoh, Kuala Kangsar</option>
+          <option value="KDH01">Kota Setar, Alor Setar</option>
+          <option value="MLK01">Seluruh Melaka</option>
+          <option value="NSN01">Seremban, Port Dickson</option>
+          <option value="PHG02">Kuantan, Pekan</option>
+          <option value="TRG01">K.Terengganu, Marang</option>
+          <option value="KTN01">Kota Bharu, Pasir Mas</option>
+          <option value="PLS01">Seluruh Perlis</option>
+          <option value="SBH01">Kota Kinabalu, Penampang</option>
+          <option value="SWK08">Kuching, Bau, Lundu</option>
+          <option value="WLY02">Labuan</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="solat-grid">
+      <div class="solat-item" id="slot_subuh">
+        <div class="solat-name">Subuh</div>
+        <div class="solat-time" id="time_subuh">--:--</div>
+      </div>
+      <div class="solat-item" id="slot_syuruk">
+        <div class="solat-name">Syuruk</div>
+        <div class="solat-time" id="time_syuruk">--:--</div>
+      </div>
+      <div class="solat-item" id="slot_zohor">
+        <div class="solat-name">Zohor</div>
+        <div class="solat-time" id="time_zohor">--:--</div>
+      </div>
+      <div class="solat-item" id="slot_asar">
+        <div class="solat-name">Asar</div>
+        <div class="solat-time" id="time_asar">--:--</div>
+      </div>
+      <div class="solat-item" id="slot_maghrib">
+        <div class="solat-name">Maghrib</div>
+        <div class="solat-time" id="time_maghrib">--:--</div>
+      </div>
+      <div class="solat-item" id="slot_isyak">
+        <div class="solat-name">Isyak</div>
+        <div class="solat-time" id="time_isyak">--:--</div>
+      </div>
+    </div>
+
+    <div class="next-solat-banner">
+      <div class="next-solat-badge" id="nextSolatTitle">⏳ Menghitung waktu seterusnya...</div>
+      <div class="solat-countdown" id="solatCountdown">--j --m</div>
+    </div>
   </div>
 
   <div class="search-box">
@@ -1299,6 +1481,162 @@
     }
 
     renderStations();
+
+    // ==========================================
+    // LOGIK JAM, KALENDAR MALAYSIA & WAKTU SOLAT
+    // ==========================================
+    let currentPrayerData = null;
+    let selectedSolatZone = localStorage.getItem('myradio_solat_zone') || 'WLY01';
+
+    function updateMalaysiaClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const mins = String(now.getMinutes()).padStart(2, '0');
+      const secs = String(now.getSeconds()).padStart(2, '0');
+      const clockEl = document.getElementById('liveClock');
+      if (clockEl) clockEl.textContent = hours + ':' + mins + ':' + secs;
+
+      const days = ['Ahad', 'Isnin', 'Selasa', 'Rabu', 'Khamis', 'Jumaat', 'Sabtu'];
+      const months = ['Jan', 'Feb', 'Mac', 'Apr', 'Mei', 'Jun', 'Jul', 'Ogo', 'Sep', 'Okt', 'Nov', 'Dis'];
+      const dayName = days[now.getDay()];
+      const dayNum = now.getDate();
+      const monthName = months[now.getMonth()];
+      const year = now.getFullYear();
+      const calEl = document.getElementById('liveCalendar');
+      if (calEl) calEl.textContent = dayName + ', ' + dayNum + ' ' + monthName + ' ' + year;
+
+      calculateNextSolat(now);
+    }
+
+    async function fetchPrayerTimes(zone) {
+      const selectEl = document.getElementById('solatZoneSelect');
+      if (selectEl) selectEl.value = zone;
+      
+      try {
+        const res = await fetch('https://api.waktusolat.app/solat/' + zone);
+        if (!res.ok) throw new Error('Rangkaian waktu solat bermasalah');
+        const data = await res.json();
+        if (data && data.prayerTime && data.prayerTime.length > 0) {
+          const now = new Date();
+          const todayDate = now.getDate();
+          const todayEntry = data.prayerTime.find(function(item) {
+            const d = parseInt(item.date.split('-')[0], 10);
+            return d === todayDate;
+          }) || data.prayerTime[0];
+
+          currentPrayerData = todayEntry;
+          localStorage.setItem('myradio_cached_solat_' + zone, JSON.stringify(todayEntry));
+          displayPrayerTimes(todayEntry);
+        }
+      } catch (err) {
+        console.warn('Gagal muat API Solat, guna cache:', err);
+        const cached = localStorage.getItem('myradio_cached_solat_' + zone);
+        if (cached) {
+          const todayEntry = JSON.parse(cached);
+          currentPrayerData = todayEntry;
+          displayPrayerTimes(todayEntry);
+        }
+      }
+    }
+
+    function format12h(timeStr) {
+      if (!timeStr) return '--:--';
+      const parts = timeStr.split(':');
+      let hour = parseInt(parts[0], 10);
+      const m = parts[1];
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      hour = hour % 12 || 12;
+      return hour + ':' + m + ' ' + ampm;
+    }
+
+    function displayPrayerTimes(entry) {
+      if (!entry) return;
+      document.getElementById('time_subuh').textContent = format12h(entry.fajr);
+      document.getElementById('time_syuruk').textContent = format12h(entry.syuruk);
+      document.getElementById('time_zohor').textContent = format12h(entry.dhuhr);
+      document.getElementById('time_asar').textContent = format12h(entry.asr);
+      document.getElementById('time_maghrib').textContent = format12h(entry.maghrib);
+      document.getElementById('time_isyak').textContent = format12h(entry.isha);
+
+      if (entry.hijri) {
+        const hParts = entry.hijri.split('-');
+        const hYear = hParts[0];
+        const hMonth = parseInt(hParts[1], 10);
+        const hDay = parseInt(hParts[2], 10);
+        const hijriMonths = ['', 'Muharram', 'Safar', 'Rabiulawal', 'Rabiulakhir', 'Jamadilawal', 'Jamadilakhir', 'Rejab', 'Syaaban', 'Ramadan', 'Syawal', 'Zulkaedah', 'Zulhijjah'];
+        const hijriFormatted = hDay + ' ' + (hijriMonths[hMonth] || '') + ' ' + hYear + 'H';
+        const hijriEl = document.getElementById('hijriCalendar');
+        if (hijriEl) hijriEl.textContent = '🌙 ' + hijriFormatted;
+      }
+
+      calculateNextSolat(new Date());
+    }
+
+    function calculateNextSolat(now) {
+      if (!currentPrayerData) return;
+
+      const prayerSlots = [
+        { id: 'subuh', name: 'Subuh', time: currentPrayerData.fajr },
+        { id: 'syuruk', name: 'Syuruk', time: currentPrayerData.syuruk },
+        { id: 'zohor', name: 'Zohor', time: currentPrayerData.dhuhr },
+        { id: 'asar', name: 'Asar', time: currentPrayerData.asr },
+        { id: 'maghrib', name: 'Maghrib', time: currentPrayerData.maghrib },
+        { id: 'isyak', name: 'Isyak', time: currentPrayerData.isha }
+      ];
+
+      document.querySelectorAll('.solat-item').forEach(function(el) {
+        el.classList.remove('current-solat');
+      });
+
+      const nowSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+      let nextSlot = null;
+      let minDiff = Infinity;
+      let activeSlotId = null;
+
+      prayerSlots.forEach(function(slot) {
+        const parts = slot.time.split(':').map(Number);
+        const slotSec = parts[0] * 3600 + parts[1] * 60;
+        const diff = slotSec - nowSec;
+
+        if (diff > 0 && diff < minDiff) {
+          minDiff = diff;
+          nextSlot = slot;
+        }
+        if (nowSec >= slotSec) {
+          activeSlotId = slot.id;
+        }
+      });
+
+      if (activeSlotId) {
+        const activeEl = document.getElementById('slot_' + activeSlotId);
+        if (activeEl) activeEl.classList.add('current-solat');
+      }
+
+      const nextTitleEl = document.getElementById('nextSolatTitle');
+      const countdownEl = document.getElementById('solatCountdown');
+
+      if (nextSlot) {
+        const hrs = Math.floor(minDiff / 3600);
+        const mins = Math.floor((minDiff % 3600) / 60);
+        const secs = minDiff % 60;
+        if (nextTitleEl) nextTitleEl.innerHTML = '🕌 Seterusnya: <b>' + nextSlot.name + '</b> (' + format12h(nextSlot.time) + ')';
+        if (countdownEl) countdownEl.textContent = '-' + hrs + 'j ' + mins + 'm ' + secs + 's';
+      } else {
+        if (nextTitleEl) nextTitleEl.innerHTML = '🌙 Waktu solat seterusnya esok: <b>Subuh</b>';
+        if (countdownEl) countdownEl.textContent = 'Selesai hari ini';
+      }
+    }
+
+    function changeSolatZone(newZone) {
+      selectedSolatZone = newZone;
+      localStorage.setItem('myradio_solat_zone', newZone);
+      fetchPrayerTimes(newZone);
+    }
+
+    setInterval(updateMalaysiaClock, 1000);
+    updateMalaysiaClock();
+    fetchPrayerTimes(selectedSolatZone);
+
   </script>
 </body>
 </html>
