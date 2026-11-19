@@ -3,28 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>MYRADIO ROYALE — Exclusive Radio Edition</title>
+  <title>MyRadio Malaysia — Stesen Radio Digital</title>
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#050507">
+  <meta name="theme-color" content="#090d16">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="./stations.js"></script>
   <style>
     :root {
-      --gold-1: #dfba73;
-      --gold-2: #c59b48;
-      --gold-3: #9b7829;
-      --gold-gradient: linear-gradient(135deg, #fbe8ad 0%, #dfba73 35%, #b88628 75%, #e6ca85 100%);
-      --gold-glow: 0 0 25px rgba(223, 186, 115, 0.28);
-      --bg-dark: #070709;
-      --card-bg: rgba(18, 18, 22, 0.72);
-      --card-border: rgba(223, 186, 115, 0.16);
-      --text-muted: #8e8e98;
+      --bg-base: #090d16;
+      --bg-surface: #111827;
+      --bg-card: rgba(17, 24, 39, 0.72);
+      --bg-card-hover: rgba(24, 34, 53, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(6, 182, 212, 0.4);
+      --accent-cyan: #06b6d4;
+      --accent-cyan-glow: rgba(6, 182, 212, 0.25);
+      --accent-blue: #3b82f6;
+      --accent-emerald: #10b981;
+      --accent-red: #f43f5e;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -32,854 +38,997 @@
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
+
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at 50% 0%, #15141c 0%, #08080a 50%, #030304 100%);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #111a2e 0%, #090d16 65%, #05070c 100%);
       background-attachment: fixed;
-      color: #f5f5f7;
+      color: var(--text-primary);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    
-    /* Subtle luxury mesh effect */
+
+    /* Ambient top glow */
     body::before {
       content: '';
       position: fixed;
-      top: 0; left: 0; right: 0; height: 350px;
-      background: radial-gradient(ellipse at 50% 10%, rgba(197, 155, 72, 0.08) 0%, transparent 70%);
+      top: 0; left: 0; right: 0; height: 260px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
 
+    /* Clean Sleek Header */
     header {
-      padding: 18px 22px;
+      padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(10, 10, 13, 0.85);
+      background: rgba(9, 13, 22, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
-      z-index: 25;
-      border-bottom: 1px solid rgba(223, 186, 115, 0.15);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      z-index: 40;
+      border-bottom: 1px solid var(--border-subtle);
     }
-    .logo-box {
+
+    .brand-group {
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    .crown-emblem {
-      width: 40px;
-      height: 40px;
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
       border-radius: 12px;
-      background: linear-gradient(145deg, #1f1d24, #121116);
-      border: 1px solid rgba(223, 186, 115, 0.35);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
+      border: 1px solid rgba(6, 182, 212, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), var(--gold-glow);
-    }
-    .brand-title {
-      font-family: 'Cinzel', serif;
       font-size: 19px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-transform: uppercase;
+      box-shadow: 0 4px 14px rgba(6, 182, 212, 0.15);
     }
-    .tagline {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      color: #9a9ab0;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-    .vip-badge {
+
+    .brand-text-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 12px;
-      border-radius: 30px;
-      background: rgba(197, 155, 72, 0.12);
-      border: 1px solid rgba(223, 186, 115, 0.4);
-      color: #e8cb89;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-    }
-    .vip-dot {
-      width: 6px;
-      height: 6px;
-      background: #dfba73;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #dfba73;
     }
 
-    /* Stats bar */
-    .exclusive-bar {
-      padding: 10px 20px 2px;
-      display: flex;
-      justify-content: space-between;
+    .brand-text-title span.grad {
+      background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-tagline {
       font-size: 11px;
       color: var(--text-muted);
-      letter-spacing: 0.5px;
+      font-weight: 500;
     }
 
-    .search-box {
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .header-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .header-btn.live-pill {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      pointer-events: none;
+    }
+
+    .live-dot-green {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulseGreen 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGreen {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* Quick Info Sub-Bar */
+    .top-info-bar {
+      padding: 10px 20px 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .clock-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .clock-pill strong {
+      color: #38bdf8;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    .solat-quick-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      padding: 4px 10px;
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 12px;
+      color: #67e8f9;
+      font-size: 11px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .solat-quick-badge:hover {
+      background: rgba(6, 182, 212, 0.16);
+      border-color: rgba(6, 182, 212, 0.4);
+    }
+
+    /* Search & Filter Section */
+    .search-wrapper {
       padding: 10px 20px 6px;
       position: relative;
     }
-    .search-input {
-      width: 100%;
-      padding: 14px 18px 14px 44px;
-      border-radius: 14px;
-      border: 1px solid rgba(223, 186, 115, 0.18);
-      background: rgba(17, 17, 22, 0.85);
-      backdrop-filter: blur(12px);
-      color: #fbfbfb;
-      font-size: 13px;
-      font-weight: 500;
-      outline: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .search-icon-pos {
-      position: absolute;
-      left: 34px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 14px;
-      opacity: 0.6;
-      pointer-events: none;
-    }
-    .search-input:focus {
-      border-color: rgba(223, 186, 115, 0.7);
-      box-shadow: 0 0 20px rgba(223, 186, 115, 0.22);
-      background: rgba(22, 22, 28, 0.95);
-    }
-    .search-input::placeholder {
-      color: #60606b;
-      font-size: 12px;
-      letter-spacing: 0.5px;
+
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
     }
 
-    .category-chips {
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      color: var(--text-muted);
+      font-size: 15px;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 13px 44px 13px 44px;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 500;
+      outline: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px var(--accent-cyan-glow);
+      background: rgba(22, 30, 48, 0.95);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .clear-search-btn {
+      position: absolute;
+      right: 14px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 15px;
+      padding: 4px;
+      display: none;
+    }
+
+    /* Filter Chips */
+    .filter-scroll-wrapper {
+      padding: 8px 20px 4px;
       display: flex;
-      gap: 10px;
-      padding: 8px 20px 14px;
+      gap: 8px;
       overflow-x: auto;
       scrollbar-width: none;
     }
-    .category-chips::-webkit-scrollbar {
+
+    .filter-scroll-wrapper::-webkit-scrollbar {
       display: none;
     }
-    .chip {
-      padding: 7px 16px;
-      border-radius: 30px;
-      font-size: 12px;
+
+    .chip-btn {
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 12.5px;
       font-weight: 600;
-      letter-spacing: 0.5px;
-      background: rgba(20, 20, 25, 0.75);
-      color: #a0a0ab;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(17, 24, 39, 0.7);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
       cursor: pointer;
       white-space: nowrap;
-      transition: all 0.25s ease;
-      backdrop-filter: blur(8px);
-    }
-    .chip:hover {
-      border-color: rgba(223, 186, 115, 0.3);
-      color: #dfba73;
-    }
-    .chip.active {
-      background: linear-gradient(135deg, rgba(197, 155, 72, 0.25), rgba(120, 90, 25, 0.35));
-      color: #f7e3b5;
-      border: 1px solid rgba(223, 186, 115, 0.75);
-      box-shadow: 0 4px 15px rgba(197, 155, 72, 0.25);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .station-list {
+    .chip-btn:hover {
+      background: rgba(30, 41, 59, 0.8);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .chip-btn.active {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.25));
+      color: #38bdf8;
+      border-color: rgba(6, 182, 212, 0.6);
+      box-shadow: 0 2px 12px rgba(6, 182, 212, 0.2);
+    }
+
+    /* Secondary Controls (State Filter + Add custom) */
+    .sub-filter-row {
+      padding: 6px 20px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .state-select-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .state-dropdown {
+      background: rgba(17, 24, 39, 0.85);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 10px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .btn-add-custom {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px dashed rgba(6, 182, 212, 0.3);
+      padding: 6px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-add-custom:hover {
+      background: rgba(6, 182, 212, 0.18);
+      border-color: var(--accent-cyan);
+    }
+
+    /* Station Grid */
+    .station-grid {
       flex: 1;
-      padding: 4px 20px 145px;
+      padding: 4px 20px 140px;
       display: grid;
       grid-template-columns: 1fr;
       gap: 12px;
+      z-index: 10;
     }
+
     @media (min-width: 640px) {
-      .station-list {
+      .station-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 14px;
       }
     }
+
     @media (min-width: 1024px) {
-      .station-list {
+      .station-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 16px;
       }
     }
 
+    /* Station Card */
     .station-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 13px 15px;
       display: flex;
       align-items: center;
       gap: 14px;
       cursor: pointer;
-      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
     }
-    .station-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 3px; height: 100%;
-      background: transparent;
-      transition: background 0.25s;
-    }
+
     .station-card:hover {
-      border-color: rgba(223, 186, 115, 0.4);
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
+
     .station-card:active {
       transform: scale(0.985);
     }
+
     .station-card.playing {
-      background: linear-gradient(135deg, rgba(28, 25, 20, 0.85) 0%, rgba(18, 17, 22, 0.9) 100%);
-      border: 1px solid rgba(223, 186, 115, 0.7);
-      box-shadow: 0 8px 30px rgba(197, 155, 72, 0.22);
-    }
-    .station-card.playing::before {
-      background: var(--gold-gradient);
+      background: linear-gradient(135deg, rgba(17, 30, 48, 0.9) 0%, rgba(13, 20, 35, 0.95) 100%);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.2);
     }
 
-    .station-icon {
+    .station-card.playing::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 3px; height: 100%;
+      background: linear-gradient(180deg, var(--accent-cyan), var(--accent-blue));
+    }
+
+    /* Station Icon Avatar */
+    .station-avatar {
       width: 48px;
       height: 48px;
       border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 23px;
-      background: linear-gradient(145deg, #1e1e24, #131317);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 22px;
       flex-shrink: 0;
       position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       transition: all 0.25s ease;
     }
-    .station-card.playing .station-icon {
-      border-color: rgba(223, 186, 115, 0.7);
-      background: linear-gradient(145deg, #2b2416, #1b160e);
-      box-shadow: 0 0 16px rgba(223, 186, 115, 0.35);
-      animation: pulseGold 2s infinite ease-in-out;
-    }
-    @keyframes pulseGold {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(223, 186, 115, 0.5); }
-      50% { box-shadow: 0 0 0 8px rgba(223, 186, 115, 0); }
+
+    .station-card.playing .station-avatar {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 16px var(--accent-cyan-glow);
     }
 
     .station-info {
       flex: 1;
       min-width: 0;
     }
-    .station-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: #fafafc;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      letter-spacing: 0.3px;
-    }
-    .station-card.playing .station-name {
-      color: #f7e4be;
-    }
-    .station-genre {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 3px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .badge-status {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      padding: 3px 8px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      color: #7d7d8c;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .station-card.playing .badge-status {
-      background: var(--gold-gradient);
-      color: #171206;
-      border: none;
-      font-weight: 800;
-      box-shadow: 0 2px 8px rgba(223, 186, 115, 0.3);
+
+    .station-title-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
     }
 
-    /* Equalizer Bars Animation */
-    .eq-container {
+    .station-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.2px;
+    }
+
+    .station-card.playing .station-name {
+      color: #38bdf8;
+    }
+
+    .station-freq-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      flex-shrink: 0;
+    }
+
+    .station-genre {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+
+    .station-meta-tags {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 5px;
+      flex-wrap: wrap;
+    }
+
+    .meta-tag {
+      font-size: 10px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Actions on card */
+    .station-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-fav {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 16px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    .btn-fav:hover {
+      color: var(--accent-red);
+      transform: scale(1.15);
+    }
+
+    .btn-fav.active {
+      color: var(--accent-red);
+    }
+
+    /* Equalizer Bar Animation */
+    .eq-wave {
       display: none;
       align-items: flex-end;
       gap: 2px;
       height: 14px;
-      margin-right: 4px;
     }
-    .station-card.playing .eq-container {
+
+    .station-card.playing .eq-wave {
       display: inline-flex;
     }
+
     .eq-bar {
-      width: 2px;
-      background: #dfba73;
-      border-radius: 1px;
+      width: 2.5px;
+      background: var(--accent-cyan);
+      border-radius: 2px;
       animation: eqBounce 1s infinite ease-in-out alternate;
     }
-    .eq-bar:nth-child(1) { height: 5px; animation-duration: 0.6s; }
-    .eq-bar:nth-child(2) { height: 12px; animation-duration: 0.8s; }
-    .eq-bar:nth-child(3) { height: 8px; animation-duration: 0.5s; }
-    .eq-bar:nth-child(4) { height: 14px; animation-duration: 0.7s; }
+
+    .eq-bar:nth-child(1) { height: 4px; animation-duration: 0.5s; }
+    .eq-bar:nth-child(2) { height: 12px; animation-duration: 0.75s; }
+    .eq-bar:nth-child(3) { height: 7px; animation-duration: 0.45s; }
+    .eq-bar:nth-child(4) { height: 14px; animation-duration: 0.65s; }
+
     @keyframes eqBounce {
       0% { height: 3px; }
       100% { height: 14px; }
     }
 
-    /* Bottom Luxury Player Dock */
+    /* Bottom Player Dock */
     .player-dock {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(10, 10, 13, 0.94);
+      background: rgba(9, 13, 22, 0.92);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border-top: 1px solid rgba(223, 186, 115, 0.25);
-      padding: 10px 22px 22px;
-      z-index: 35;
-      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.85);
+      border-top: 1px solid var(--border-subtle);
+      padding: 10px 20px max(14px, env(safe-area-inset-bottom));
+      z-index: 50;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.7);
     }
-    .player-progress-bar {
+
+    .player-progress-track {
+      position: absolute;
+      top: 0; left: 0; right: 0;
       height: 2px;
-      background: rgba(255, 255, 255, 0.08);
-      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.05);
       overflow: hidden;
-      position: relative;
     }
+
     .player-progress-fill {
       height: 100%;
       width: 0%;
-      background: var(--gold-gradient);
-      transition: width 0.3s;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
     }
-    .player-progress-fill.active {
+
+    .player-progress-fill.buffering {
       width: 100%;
-      animation: indeterminateGold 1.8s infinite linear;
-      background: linear-gradient(90deg, #b88628, #dfba73, #fbe8ad, #b88628);
+      background: linear-gradient(90deg, #06b6d4, #3b82f6, #06b6d4);
+      animation: bufferGlide 1.5s infinite linear;
     }
-    @keyframes indeterminateGold {
+
+    @keyframes bufferGlide {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
     }
-    .player-inner {
+
+    .player-dock-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
     }
-    .player-track {
+
+    .dock-track-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       flex: 1;
       min-width: 0;
     }
-    .player-track-name {
-      font-size: 15px;
+
+    .dock-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .dock-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .dock-title {
+      font-size: 14.5px;
       font-weight: 700;
+      color: var(--text-primary);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: #fafafc;
-      letter-spacing: 0.3px;
     }
-    .player-track-sub {
-      font-size: 11px;
-      color: #dfba73;
-      margin-top: 3px;
+
+    .dock-status-line {
+      font-size: 11.5px;
+      color: var(--text-secondary);
       display: flex;
       align-items: center;
       gap: 6px;
-      letter-spacing: 0.5px;
+      margin-top: 2px;
     }
-    .live-dot {
-      width: 7px;
-      height: 7px;
-      background: #e53e3e;
+
+    .status-indicator-dot {
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
+      background: #64748b;
       display: inline-block;
-      box-shadow: 0 0 10px #e53e3e;
-      animation: blink 1s infinite alternate;
     }
-    @keyframes blink {
-      0% { opacity: 0.3; }
-      100% { opacity: 1; }
+
+    .status-indicator-dot.live {
+      background: #10b981;
+      box-shadow: 0 0 6px #10b981;
     }
-    .controls {
+
+    .status-indicator-dot.buffering {
+      background: #f59e0b;
+      box-shadow: 0 0 6px #f59e0b;
+    }
+
+    /* Player Controls */
+    .dock-controls {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
     }
-    .btn-control {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #e5e5ea;
+
+    .dock-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      font-size: 16px;
+      font-size: 15px;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .btn-control:hover {
-      border-color: rgba(223, 186, 115, 0.4);
-      color: #dfba73;
+
+    .dock-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
     }
-    .btn-control:active {
-      background: rgba(223, 186, 115, 0.15);
+
+    .dock-btn:active {
       transform: scale(0.92);
     }
-    .btn-play {
-      width: 52px;
-      height: 52px;
-      font-size: 22px;
-      background: var(--gold-gradient);
-      color: #120e06;
+
+    .dock-btn.btn-play {
+      width: 48px;
+      height: 48px;
+      font-size: 20px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #ffffff;
       border: none;
-      box-shadow: 0 6px 20px rgba(197, 155, 72, 0.45);
-      transition: all 0.25s;
-    }
-    .btn-play:hover {
-      box-shadow: 0 8px 25px rgba(223, 186, 115, 0.65);
-      transform: scale(1.04);
-    }
-    .btn-play:active {
-      transform: scale(0.94);
+      box-shadow: 0 4px 18px rgba(6, 182, 212, 0.4);
     }
 
-    /* Custom Add Station Banner */
-    .add-station-banner {
-      background: rgba(18, 18, 22, 0.5);
-      border: 1px dashed rgba(223, 186, 115, 0.25);
-      border-radius: 16px;
-      padding: 13px;
-      text-align: center;
-      margin: 4px 20px 12px;
+    .dock-btn.btn-play:hover {
+      box-shadow: 0 6px 24px rgba(6, 182, 212, 0.6);
+      transform: scale(1.06);
+    }
+
+    /* Volume / Extra Controls (Desktop) */
+    .dock-extra-controls {
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .dock-extra-controls {
+        display: flex;
+      }
+    }
+
+    .vol-slider {
+      width: 80px;
+      accent-color: var(--accent-cyan);
       cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: #c59b48;
-      transition: all 0.2s;
-    }
-    .add-station-banner:hover {
-      border-color: #dfba73;
-      background: rgba(197, 155, 72, 0.08);
-      color: #f7e3b5;
+      opacity: 0.8;
+      transition: opacity 0.2s;
     }
 
-    /* Modal Styling */
-    .modal-overlay {
+    .vol-slider:hover {
+      opacity: 1;
+    }
+
+    /* Modal Windows (Waktu Solat & Custom Station) */
+    .modal-backdrop {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 100;
-      padding: 20px;
+      padding: 16px;
     }
-    .modal-card {
-      background: #141318;
-      border: 1px solid rgba(223, 186, 115, 0.35);
+
+    .modal-box {
+      background: #111827;
+      border: 1px solid var(--border-subtle);
       border-radius: 20px;
       width: 100%;
-      max-width: 380px;
-      padding: 24px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), var(--gold-glow);
+      max-width: 420px;
+      padding: 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      position: relative;
     }
-    .modal-card h3 {
-      font-family: 'Cinzel', serif;
-      letter-spacing: 1.5px;
-      color: #f5dfb0;
-      font-size: 16px;
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 16px;
-      text-transform: uppercase;
     }
-    .modal-input {
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-close-modal {
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      color: var(--text-secondary);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .btn-close-modal:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .modal-input-field {
       width: 100%;
       padding: 12px 14px;
       margin-bottom: 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(223, 186, 115, 0.2);
-      background: #0a0a0d;
-      color: white;
-      font-size: 13px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(0, 0, 0, 0.35);
+      color: #fff;
+      font-size: 13.5px;
       outline: none;
     }
-    .modal-input:focus {
-      border-color: #dfba73;
+
+    .modal-input-field:focus {
+      border-color: var(--accent-cyan);
     }
-    .modal-buttons {
+
+    .modal-footer {
       display: flex;
-      gap: 12px;
       justify-content: flex-end;
+      gap: 10px;
       margin-top: 14px;
     }
-    .btn-action {
-      padding: 10px 18px;
+
+    .btn-modal {
+      padding: 9px 18px;
       border-radius: 10px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-size: 13px;
+      font-weight: 600;
       border: none;
       cursor: pointer;
-    }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
-      color: #cbcbce;
-    }
-    .btn-primary {
-      background: var(--gold-gradient);
-      color: #120e06;
-      box-shadow: 0 4px 12px rgba(197, 155, 72, 0.35);
+      transition: all 0.2s;
     }
 
-    /* Waktu Jam & Waktu Solat Royale Widget */
-    .prayer-widget {
-      margin: 12px 18px 8px 18px;
-      background: linear-gradient(145deg, rgba(26, 23, 32, 0.95), rgba(12, 12, 16, 0.95));
-      border: 1px solid rgba(223, 186, 115, 0.35);
-      border-radius: 18px;
-      padding: 14px 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.06);
+    .btn-modal-cancel {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
     }
-    .prayer-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-    .clock-time {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      font-family: 'Cinzel', monospace, serif;
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.1;
-    }
-    .clock-date {
-      font-size: 11px;
-      color: #b3b3be;
-      margin-top: 4px;
-      font-weight: 500;
-    }
-    .hijri-date {
-      font-size: 10px;
-      color: var(--gold-1);
-      font-weight: 600;
-    }
-    .zone-selector-box {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
-    }
-    .zone-select {
-      background: rgba(10, 10, 14, 0.85);
-      border: 1px solid rgba(223, 186, 115, 0.35);
-      color: #f2e2be;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 5px 8px;
-      border-radius: 8px;
-      outline: none;
-      cursor: pointer;
-      max-width: 145px;
-    }
-    .zone-select option {
-      background: #141318;
+
+    .btn-modal-submit {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
       color: #fff;
     }
-    .solat-grid {
+
+    /* Solat Grid inside Modal */
+    .solat-modal-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 6px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
     }
-    .solat-item {
+
+    .solat-box-card {
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(223, 186, 115, 0.12);
-      border-radius: 10px;
-      padding: 8px 4px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 10px 8px;
       text-align: center;
-      transition: all 0.3s ease;
     }
-    .solat-item.current-solat {
-      background: rgba(197, 155, 72, 0.22);
-      border-color: rgba(223, 186, 115, 0.65);
-      box-shadow: 0 0 12px rgba(223, 186, 115, 0.3);
-      transform: translateY(-2px);
+
+    .solat-box-card.active {
+      background: rgba(6, 182, 212, 0.15);
+      border-color: rgba(6, 182, 212, 0.5);
     }
-    .solat-name {
-      font-size: 9.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #8f8f9c;
-      margin-bottom: 3px;
-    }
-    .solat-item.current-solat .solat-name {
-      color: #dfba73;
-    }
-    .solat-time {
+
+    .solat-box-name {
       font-size: 11px;
-      font-weight: 700;
-      color: #f5f5f7;
-      font-family: 'Plus Jakarta Sans', monospace;
-    }
-    .next-solat-banner {
-      margin-top: 10px;
-      padding-top: 8px;
-      border-top: 1px dashed rgba(223, 186, 115, 0.18);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-    }
-    .next-solat-badge {
-      color: #e4c98e;
       font-weight: 600;
-    }
-    .solat-countdown {
-      background: rgba(223, 186, 115, 0.15);
-      border: 1px solid rgba(223, 186, 115, 0.3);
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-weight: 700;
-      color: #fbe8ad;
-      font-size: 10.5px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 4px;
     }
 
-  
-    /* Mode Switcher Tabs */
-    .view-switcher {
-      display: flex;
-      margin: 12px 20px 14px;
-      background: rgba(18, 18, 22, 0.85);
-      border: 1px solid rgba(223, 186, 115, 0.22);
-      border-radius: 16px;
-      padding: 4px;
-      gap: 6px;
+    .solat-box-card.active .solat-box-name {
+      color: #38bdf8;
     }
-    .view-tab {
-      flex: 1;
-      padding: 10px 14px;
-      border-radius: 12px;
-      background: transparent;
-      border: none;
-      color: #9a9ab0;
+
+    .solat-box-time {
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.25s ease;
-    }
-    .view-tab.active {
-      background: linear-gradient(135deg, rgba(223, 186, 115, 0.25), rgba(197, 155, 72, 0.35));
-      color: #fce7b0;
-      border: 1px solid rgba(223, 186, 115, 0.6);
-      box-shadow: 0 4px 15px rgba(197, 155, 72, 0.2);
-    }
-    .view-tab-count {
-      font-size: 10px;
-      padding: 2px 7px;
-      border-radius: 10px;
-      background: rgba(0,0,0,0.4);
-      color: #dfba73;
-      border: 1px solid rgba(223, 186, 115, 0.3);
+      color: var(--text-primary);
+      font-family: monospace;
     }
 
-    /* Raya Folder Showcase Banner */
-    .raya-folder-banner {
-      margin: 4px 20px 16px;
-      background: linear-gradient(135deg, rgba(26, 38, 24, 0.85) 0%, rgba(18, 28, 18, 0.95) 50%, rgba(10, 15, 10, 0.98) 100%);
-      border: 1.5px solid rgba(110, 200, 120, 0.35);
-      border-radius: 20px;
-      padding: 16px 18px;
-      box-shadow: 0 8px 30px rgba(0, 30, 10, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-    .raya-folder-banner::before {
-      content: '🌙';
-      position: absolute;
-      right: 15px;
-      bottom: -10px;
-      font-size: 72px;
-      opacity: 0.08;
-      pointer-events: none;
-    }
-    .raya-banner-header {
+    .next-solat-callout {
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 12px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-    .raya-banner-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: #bbf7d0;
-      letter-spacing: 0.5px;
-      display: flex;
       align-items: center;
-      gap: 8px;
-    }
-    .raya-banner-desc {
       font-size: 12px;
-      color: #86efac;
-      opacity: 0.85;
-      margin-top: 2px;
     }
-    .raya-action-group {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .btn-autoplay-raya {
-      flex: 1;
-      min-width: 140px;
-      padding: 11px 16px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #22c55e 0%, #16a34a 60%, #15803d 100%);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: 0 4px 18px rgba(34, 197, 94, 0.4);
-      transition: all 0.2s ease;
-    }
-    .btn-autoplay-raya:hover {
-      box-shadow: 0 6px 22px rgba(34, 197, 94, 0.6);
-      transform: translateY(-1px);
-    }
-    .btn-autoplay-raya:active {
-      transform: scale(0.97);
-    }
-    .btn-shuffle-raya {
-      padding: 11px 16px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.08);
-      color: #dcfce7;
-      border: 1px solid rgba(110, 200, 120, 0.3);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .btn-shuffle-raya:hover {
-      background: rgba(110, 200, 120, 0.2);
-      border-color: #4ade80;
-    }
-
-    /* Auto Play Status Badge */
-    .autoplay-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid rgba(34, 197, 94, 0.4);
-      color: #4ade80;
-    }
-    .autoplay-badge.pulse {
-      animation: pulseGreen 1.8s infinite;
-    }
-    @keyframes pulseGreen {
-      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
-      70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-    }
-
   </style>
 </head>
 <body>
 
+  <!-- Sleek Header -->
   <header>
-    <div class="logo-box">
-      <div class="crown-emblem">👑</div>
+    <div class="brand-group">
+      <div class="brand-logo">📻</div>
       <div>
-        <div class="brand-title">MYRADIO ROYALE</div>
-        <div class="tagline">Exclusive Malaysian Broadcaster</div>
+        <div class="brand-text-title">
+          <span>MyRadio</span>
+          <span class="grad">Malaysia</span>
+        </div>
+        <div class="brand-tagline">Stesen Radio Digital Rasmi</div>
       </div>
     </div>
-    <div class="vip-badge">
-      <span class="vip-dot"></span>
-      <span>VIP EDITION</span>
+
+    <div class="header-actions">
+      <div class="header-btn live-pill">
+        <span class="live-dot-green"></span>
+        <span id="headerLiveCount">68 Live</span>
+      </div>
+      <button class="header-btn" onclick="openSolatModal()" title="Waktu Solat JAKIM">
+        🕌 <span style="display:none;" id="solatBtnLabel">Solat</span>
+      </button>
+      <button class="header-btn" onclick="openTimerModal()" id="btnSleepTimer" title="Pemasa Tidur (Sleep Timer)">
+        ⏱️ <span id="sleepTimerLabel"></span>
+      </button>
     </div>
   </header>
 
-  <div class="exclusive-bar">
-    <span>💎 ULTRA HD LOSSLESS STREAM</span>
-    <span>🇲🇾 87 SALURAN RADIO & LAGU RAYA</span>
+  <!-- Quick Info Bar (Jam & Countdown Solat) -->
+  <div class="top-info-bar">
+    <div class="clock-pill">
+      <span id="currentDateStr">Hari Ini</span>
+      <strong id="liveClockDisplay">--:--:--</strong>
+    </div>
+    <div class="solat-quick-badge" onclick="openSolatModal()" id="topSolatPill">
+      🕌 Memuat waktu solat...
+    </div>
   </div>
 
+  <!-- Search Input -->
+  <div class="search-wrapper">
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="Cari nama stesen, frekuensi, genre atau negeri...">
+      <button class="clear-search-btn" id="btnClearSearch" onclick="clearSearch()">✕</button>
+    </div>
+  </div>
 
-  <!-- Waktu Jam & Waktu Solat Malaysia Widget -->
-  <div class="prayer-widget">
-    <div class="prayer-header">
-      <div>
-        <div class="clock-time" id="liveClock">--:--:--</div>
-        <div class="clock-date" id="liveCalendar">Memuat tarikh...</div>
-        <div class="hijri-date" id="hijriCalendar">-- Hijrah</div>
+  <!-- Category Pills -->
+  <div class="filter-scroll-wrapper" id="categoryChips">
+    <button class="chip-btn active" onclick="setCategory('semua')">✦ Semua Stesen (<span id="countAll">68</span>)</button>
+    <button class="chip-btn" onclick="setCategory('fav')">❤️ Kegemaran (<span id="countFav">0</span>)</button>
+    <button class="chip-btn" onclick="setCategory('popular')">🔥 Popular</button>
+    <button class="chip-btn" onclick="setCategory('rtm')">🏛️ RTM & Negeri</button>
+    <button class="chip-btn" onclick="setCategory('muzik')">🎶 Muzik & Hits</button>
+    <button class="chip-btn" onclick="setCategory('berita')">📰 Berita & Info</button>
+    <button class="chip-btn" onclick="setCategory('islamik')">🕌 Santapan Rohani</button>
+    <button class="chip-btn" onclick="setCategory('komuniti')">🎙️ Komuniti</button>
+  </div>
+
+  <!-- Sub Filter (State selection + Custom Station) -->
+  <div class="sub-filter-row">
+    <div class="state-select-wrapper">
+      <span>Lokasi:</span>
+      <select id="stateSelect" class="state-dropdown" onchange="filterByState(this.value)">
+        <option value="semua">Semua Negeri</option>
+        <option value="Kebangsaan">Kebangsaan</option>
+        <option value="Kuala Lumpur">Kuala Lumpur / Putrajaya</option>
+        <option value="Selangor">Selangor</option>
+        <option value="Johor">Johor</option>
+        <option value="Perak">Perak</option>
+        <option value="Pulau Pinang">Pulau Pinang</option>
+        <option value="Kedah">Kedah</option>
+        <option value="Negeri Sembilan">Negeri Sembilan</option>
+        <option value="Melaka">Melaka</option>
+        <option value="Pahang">Pahang</option>
+        <option value="Terengganu">Terengganu</option>
+        <option value="Kelantan">Kelantan</option>
+        <option value="Perlis">Perlis</option>
+        <option value="Sabah">Sabah</option>
+        <option value="Sarawak">Sarawak</option>
+      </select>
+    </div>
+    <button class="btn-add-custom" onclick="openAddStationModal()">+ Tambah URL Stream</button>
+  </div>
+
+  <!-- Stations Grid -->
+  <main class="station-grid" id="stationContainer">
+    <!-- Populated by JavaScript -->
+  </main>
+
+  <!-- Bottom Player Dock -->
+  <div class="player-dock">
+    <div class="player-progress-track">
+      <div class="player-progress-fill" id="dockProgress"></div>
+    </div>
+    <div class="player-dock-content">
+      <div class="dock-track-info">
+        <div class="dock-avatar" id="dockAvatar">📻</div>
+        <div class="dock-meta">
+          <div class="dock-title" id="dockStationTitle">Pilih Stesen Siaran</div>
+          <div class="dock-status-line">
+            <span class="status-indicator-dot" id="dockStatusDot"></span>
+            <span id="dockStatusText">Sedia untuk siaran langsung</span>
+          </div>
+        </div>
       </div>
-      <div class="zone-selector-box">
-        <span style="font-size: 9.5px; color: #8e8e98; text-transform: uppercase; letter-spacing: 0.5px;">Zon Malaysia (JAKIM)</span>
-        <select id="solatZoneSelect" class="zone-select" onchange="changeSolatZone(this.value)">
-          <option value="WLY01">KL & Putrajaya</option>
+
+      <div class="dock-controls">
+        <button class="dock-btn" onclick="playPreviousStation()" title="Sebelumnya">⏮</button>
+        <button class="dock-btn btn-play" id="dockPlayBtn" onclick="togglePlayback()" title="Main / Jeda">▶</button>
+        <button class="dock-btn" onclick="playNextStation()" title="Seterusnya">⏭</button>
+      </div>
+
+      <div class="dock-extra-controls">
+        <button class="dock-btn" onclick="toggleMute()" id="btnMute" title="Mute / Suara">🔊</button>
+        <input type="range" class="vol-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Waktu Solat JAKIM -->
+  <div class="modal-backdrop" id="solatModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">🕌 Waktu Solat Malaysia (JAKIM)</div>
+        <button class="btn-close-modal" onclick="closeSolatModal()">✕</button>
+      </div>
+      <div>
+        <label style="font-size: 11.5px; color: var(--text-secondary); display: block; margin-bottom: 6px;">Pilih Zon Solat Anda:</label>
+        <select id="solatZoneDropdown" class="modal-input-field" onchange="changeSolatZone(this.value)">
+          <option value="WLY01">KL, Putrajaya</option>
           <option value="SGR01">Gombak, Petaling, Sepang</option>
-          <option value="JHR02">Johor Bahru & Kulai</option>
+          <option value="JHR02">Johor Bahru, Kulai</option>
           <option value="PNG01">Seluruh Pulau Pinang</option>
           <option value="PRK02">Ipoh, Kuala Kangsar</option>
           <option value="KDH01">Kota Setar, Alor Setar</option>
@@ -893,346 +1042,266 @@
           <option value="SWK08">Kuching, Bau, Lundu</option>
           <option value="WLY02">Labuan</option>
         </select>
-      </div>
-    </div>
 
-    <div class="solat-grid">
-      <div class="solat-item" id="slot_subuh">
-        <div class="solat-name">Subuh</div>
-        <div class="solat-time" id="time_subuh">--:--</div>
-      </div>
-      <div class="solat-item" id="slot_syuruk">
-        <div class="solat-name">Syuruk</div>
-        <div class="solat-time" id="time_syuruk">--:--</div>
-      </div>
-      <div class="solat-item" id="slot_zohor">
-        <div class="solat-name">Zohor</div>
-        <div class="solat-time" id="time_zohor">--:--</div>
-      </div>
-      <div class="solat-item" id="slot_asar">
-        <div class="solat-name">Asar</div>
-        <div class="solat-time" id="time_asar">--:--</div>
-      </div>
-      <div class="solat-item" id="slot_maghrib">
-        <div class="solat-name">Maghrib</div>
-        <div class="solat-time" id="time_maghrib">--:--</div>
-      </div>
-      <div class="solat-item" id="slot_isyak">
-        <div class="solat-name">Isyak</div>
-        <div class="solat-time" id="time_isyak">--:--</div>
-      </div>
-    </div>
+        <div class="solat-modal-grid">
+          <div class="solat-box-card" id="card_subuh">
+            <div class="solat-box-name">Subuh</div>
+            <div class="solat-box-time" id="val_subuh">--:--</div>
+          </div>
+          <div class="solat-box-card" id="card_syuruk">
+            <div class="solat-box-name">Syuruk</div>
+            <div class="solat-box-time" id="val_syuruk">--:--</div>
+          </div>
+          <div class="solat-box-card" id="card_zohor">
+            <div class="solat-box-name">Zohor</div>
+            <div class="solat-box-time" id="val_zohor">--:--</div>
+          </div>
+          <div class="solat-box-card" id="card_asar">
+            <div class="solat-box-name">Asar</div>
+            <div class="solat-box-time" id="val_asar">--:--</div>
+          </div>
+          <div class="solat-box-card" id="card_maghrib">
+            <div class="solat-box-name">Maghrib</div>
+            <div class="solat-box-time" id="val_maghrib">--:--</div>
+          </div>
+          <div class="solat-box-card" id="card_isyak">
+            <div class="solat-box-name">Isyak</div>
+            <div class="solat-box-time" id="val_isyak">--:--</div>
+          </div>
+        </div>
 
-    <div class="next-solat-banner">
-      <div class="next-solat-badge" id="nextSolatTitle">⏳ Menghitung waktu seterusnya...</div>
-      <div class="solat-countdown" id="solatCountdown">--j --m</div>
+        <div class="next-solat-callout">
+          <span id="nextSolatLabel">Menghitung...</span>
+          <strong id="nextSolatCount" style="color: #38bdf8; font-family: monospace;">--:--</strong>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="search-box">
-    <span class="search-icon-pos">🔍</span>
-    <input type="text" id="searchInput" class="search-input" placeholder="Cari stesen radio eksklusif...">
-  </div>
-
-  <!-- Tab Pilihan: Stesen Radio vs Folder Khas Lagu Raya -->
-  <div class="view-switcher">
-    <button class="view-tab active" id="tabRadio" onclick="switchMainView('radio')">
-      📻 Stesen Radio Live <span class="view-tab-count" id="radioCountBadge">47</span>
-    </button>
-    <button class="view-tab" id="tabRaya" onclick="switchMainView('raya')" style="border-color: rgba(34, 197, 94, 0.3);">
-      🌙 Folder Khas Lagu Raya <span class="view-tab-count" style="color:#4ade80; border-color:rgba(34,197,94,0.4);" id="rayaCountBadge">58</span>
-    </button>
-  </div>
-
-  <!-- Banner Folder Khas Lagu Raya dengan Butang Autoplay Semua -->
-  <div class="raya-folder-banner" id="rayaShowcaseBanner" style="display:none;">
-    <div class="raya-banner-header">
+  <!-- Modal: Tambah Stesen Persendirian -->
+  <div class="modal-backdrop" id="addStationModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">📻 Tambah URL Stesen Sendiri</div>
+        <button class="btn-close-modal" onclick="closeAddStationModal()">✕</button>
+      </div>
       <div>
-        <div class="raya-banner-title">
-          <span>🎉 Koleksi Khas Lagu Raya Nostalgia & Terkini</span>
-          <span class="autoplay-badge pulse" id="autoplayStatusBadge">▶ Autoplay Aktif</span>
-        </div>
-        <div class="raya-banner-desc">58 Khazanah Lagu Raya Aidilfitri Sepanjang Zaman. Lagu habis automatik sambung lagu seterusnya!</div>
-      </div>
-    </div>
-    <div class="raya-action-group">
-      <button class="btn-autoplay-raya" onclick="startRayaAutoplay(false)">
-        ▶ Autoplay Semua Lagu Raya
-      </button>
-      <button class="btn-shuffle-raya" onclick="startRayaAutoplay(true)">
-        🔀 Shuffle & Main
-      </button>
-    </div>
-  </div>
-
-  <div class="category-chips" id="radioCategoryChips">
-    <button class="chip active" onclick="filterCategory('semua')">✦ Semua Stesen</button>
-    <button class="chip" onclick="filterCategory('popular')">👑 Paling Hangat</button>
-    <button class="chip" onclick="filterCategory('negeri')">🏛️ Radio Negeri RTM</button>
-    <button class="chip" onclick="filterCategory('berita')">📰 Berita & Analisis</button>
-    <button class="chip" onclick="filterCategory('islamik')">🕌 Santapan Rohani</button>
-    <button class="chip" onclick="filterCategory('muzik')">🎷 Lounge & Muzik</button>
-  </div>
-
-  <div class="add-station-banner" onclick="openAddModal()">
-    ✦ Tambah Stesen Persendirian (Custom Stream URL)
-  </div>
-
-  <div class="station-list" id="stationList">
-    <!-- Diisi oleh Javascript -->
-  </div>
-
-  <!-- Player Bawah -->
-  <div class="player-dock">
-    <div class="player-progress-bar">
-      <div class="player-progress-fill" id="playerProgress"></div>
-    </div>
-    <div class="player-inner">
-      <div class="player-track">
-        <div class="player-track-name" id="currentTitle">Pilih Stesen Siaran</div>
-        <div class="player-track-sub" id="currentSubtitle">
-          <span class="live-dot" style="display:none;" id="liveIndicator"></span>
-          <span id="statusText">Sentuh mana-mana stesen untuk memainkan</span>
+        <input type="text" id="customName" class="modal-input-field" placeholder="Nama Stesen (cth: Astro Oasis)">
+        <input type="text" id="customFreq" class="modal-input-field" placeholder="Frekuensi (cth: 104.5 FM / Digital)">
+        <input type="text" id="customGenre" class="modal-input-field" placeholder="Kategori / Slogan">
+        <input type="text" id="customUrl" class="modal-input-field" placeholder="URL Audio Stream (.mp3, .aac, .m3u8)">
+        <div class="modal-footer">
+          <button class="btn-modal btn-modal-cancel" onclick="closeAddStationModal()">Batal</button>
+          <button class="btn-modal btn-modal-submit" onclick="saveCustomStation()">Simpan</button>
         </div>
       </div>
-      <div class="controls">
-        <button class="btn-control" onclick="playPrev()" title="Sebelumnya">⏮</button>
-        <button class="btn-control btn-play" id="btnPlayPause" onclick="togglePlay()">▶</button>
-        <button class="btn-control" onclick="playNext()" title="Seterusnya">⏭</button>
-      </div>
     </div>
   </div>
 
-  <!-- Modal Tambah Stesen -->
-  <div class="modal-overlay" id="addModal">
-    <div class="modal-card">
-      <h3>Tambah Stesen Baharu</h3>
-      <input type="text" id="newStationName" class="modal-input" placeholder="Nama Stesen (cth: Suria FM)">
-      <input type="text" id="newStationCategory" class="modal-input" placeholder="Kategori (popular / muzik / islamik)">
-      <input type="text" id="newStationUrl" class="modal-input" placeholder="URL Stream (mp3 / aac / m3u8)">
-      <div class="modal-buttons">
-        <button class="btn-action btn-secondary" onclick="closeAddModal()">Batal</button>
-        <button class="btn-action btn-primary" onclick="saveNewStation()">Simpan Stesen</button>
+  <!-- Modal: Sleep Timer -->
+  <div class="modal-backdrop" id="timerModal">
+    <div class="modal-box" style="max-width: 320px; text-align: center;">
+      <div class="modal-header">
+        <div class="modal-title">⏱️ Pemasa Tidur</div>
+        <button class="btn-close-modal" onclick="closeTimerModal()">✕</button>
       </div>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Pilih tempoh sebelum siaran radio dijeda secara automatik:</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <button class="chip-btn" style="justify-content:center;" onclick="setSleepTimer(15)">15 Minit</button>
+        <button class="chip-btn" style="justify-content:center;" onclick="setSleepTimer(30)">30 Minit</button>
+        <button class="chip-btn" style="justify-content:center;" onclick="setSleepTimer(45)">45 Minit</button>
+        <button class="chip-btn" style="justify-content:center;" onclick="setSleepTimer(60)">60 Minit</button>
+      </div>
+      <button class="btn-modal btn-modal-cancel" style="width: 100%; margin-top: 14px;" onclick="cancelSleepTimer()">Matikan Pemasa</button>
     </div>
   </div>
 
   <audio id="audioPlayer" preload="none"></audio>
 
   <script>
-    // Data dimuatkan daripada stations.js (RADIO_STATIONS & RAYA_SONGS)
-    const customUserStations = JSON.parse(localStorage.getItem('myradio_user_added')) || [];
-    const baseRadioStations = typeof RADIO_STATIONS !== 'undefined' ? RADIO_STATIONS : [];
-    const baseRayaSongs = typeof RAYA_SONGS !== 'undefined' ? RAYA_SONGS : [];
+    // ==========================================
+    // DATA & STATE MANAGEMENT
+    // ==========================================
+    const baseList = (typeof RADIO_STATIONS !== 'undefined') ? RADIO_STATIONS : [];
+    let customStations = JSON.parse(localStorage.getItem('myradio_custom_list')) || [];
+    let favorites = JSON.parse(localStorage.getItem('myradio_favorites')) || [];
 
-    // State Pengurusan Folder & Main
-    let currentMainView = 'radio'; // 'radio' atau 'raya'
-    let currentFilter = 'semua';   // untuk kategori radio
-    let currentStationList = [];   // senarai item yang sedang dipaparkan
-    let activeTrack = null;        // item yang sedang dimainkan
+    let currentCategory = 'semua';
+    let currentStateFilter = 'semua';
+    let searchQuery = '';
+
+    let activeTrack = null;
     let isPlaying = false;
-    let isRayaAutoplay = true;     // Mod autoplay berterusan untuk Lagu Raya
     let hls = null;
+    let sleepTimerTimeout = null;
+    let sleepTimerRemaining = 0;
+    let sleepTimerInterval = null;
 
     const audio = document.getElementById('audioPlayer');
-    const btnPlay = document.getElementById('btnPlayPause');
-    const stationList = document.getElementById('stationList');
-    const currentTitle = document.getElementById('currentTitle');
-    const currentSubtitle = document.getElementById('currentSubtitle');
-    const statusText = document.getElementById('statusText');
-    const liveIndicator = document.getElementById('liveIndicator');
-    const playerProgress = document.getElementById('playerProgress');
+    const stationContainer = document.getElementById('stationContainer');
     const searchInput = document.getElementById('searchInput');
+    const btnClearSearch = document.getElementById('btnClearSearch');
+    const dockStationTitle = document.getElementById('dockStationTitle');
+    const dockStatusText = document.getElementById('dockStatusText');
+    const dockStatusDot = document.getElementById('dockStatusDot');
+    const dockAvatar = document.getElementById('dockAvatar');
+    const dockPlayBtn = document.getElementById('dockPlayBtn');
+    const dockProgress = document.getElementById('dockProgress');
 
-    // Update nombor badge tab
-    const elRadioCount = document.getElementById('radioCountBadge');
-    const elRayaCount = document.getElementById('rayaCountBadge');
-    if (elRadioCount) elRadioCount.textContent = (customUserStations.length + baseRadioStations.length);
-    if (elRayaCount) elRayaCount.textContent = baseRayaSongs.length;
-
-    // Tukar View Antara Radio Live & Folder Khas Lagu Raya
-    function switchMainView(view) {
-      currentMainView = view;
-      const tabRadio = document.getElementById('tabRadio');
-      const tabRaya = document.getElementById('tabRaya');
-      const rayaBanner = document.getElementById('rayaShowcaseBanner');
-      const radioChips = document.getElementById('radioCategoryChips');
-      const addBanner = document.querySelector('.add-station-banner');
-
-      if (view === 'raya') {
-        tabRadio.classList.remove('active');
-        tabRaya.classList.add('active');
-        if (rayaBanner) rayaBanner.style.display = 'block';
-        if (radioChips) radioChips.style.display = 'none';
-        if (addBanner) addBanner.style.display = 'none';
-        searchInput.placeholder = 'Cari lagu raya kegemaran (cth: Sudirman, P. Ramlee, Siti)...';
-      } else {
-        tabRadio.classList.add('active');
-        tabRaya.classList.remove('active');
-        if (rayaBanner) rayaBanner.style.display = 'none';
-        if (radioChips) radioChips.style.display = 'flex';
-        if (addBanner) addBanner.style.display = 'block';
-        searchInput.placeholder = 'Cari stesen radio eksklusif...';
-      }
-      renderStations();
+    // Update Header Counts
+    function updateCounts() {
+      const total = baseList.length + customStations.length;
+      document.getElementById('headerLiveCount').textContent = `${total} Live`;
+      document.getElementById('countAll').textContent = total;
+      document.getElementById('countFav').textContent = favorites.length;
     }
 
-    // Papar Senarai Mengikut Folder Terpilih
+    // Gabung stesen default & custom
+    function getAllStations() {
+      return [...customStations, ...baseList];
+    }
+
+    // Render Stations
     function renderStations() {
-      stationList.innerHTML = '';
-      const query = searchInput.value.toLowerCase().trim();
+      stationContainer.innerHTML = '';
+      const all = getAllStations();
 
-      if (currentMainView === 'raya') {
-        currentStationList = baseRayaSongs.filter(s => {
-          return s.name.toLowerCase().includes(query) || (s.genre && s.genre.toLowerCase().includes(query));
-        });
-      } else {
-        const allRadio = [...customUserStations, ...baseRadioStations];
-        currentStationList = allRadio.filter(s => {
-          const matchCategory = currentFilter === 'semua' || s.category === currentFilter;
-          const matchSearch = s.name.toLowerCase().includes(query) || (s.genre && s.genre.toLowerCase().includes(query));
-          return matchCategory && matchSearch;
-        });
-      }
+      const filtered = all.filter(st => {
+        // Kategori
+        if (currentCategory === 'fav') {
+          if (!favorites.includes(st.id)) return false;
+        } else if (currentCategory !== 'semua') {
+          if (st.category !== currentCategory) return false;
+        }
 
-      if (currentStationList.length === 0) {
-        stationList.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #71717a; padding: 50px 0; font-size: 13px;">Tiada siaran / lagu dijumpai.</div>';
+        // Negeri
+        if (currentStateFilter !== 'semua') {
+          if (!st.state || !st.state.toLowerCase().includes(currentStateFilter.toLowerCase())) {
+            return false;
+          }
+        }
+
+        // Carian teks
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const matchName = st.name && st.name.toLowerCase().includes(q);
+          const matchFreq = st.freq && st.freq.toLowerCase().includes(q);
+          const matchGenre = st.genre && st.genre.toLowerCase().includes(q);
+          const matchState = st.state && st.state.toLowerCase().includes(q);
+          if (!matchName && !matchFreq && !matchGenre && !matchState) return false;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        stationContainer.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 50px 20px; color: var(--text-muted);">
+            <div style="font-size: 32px; margin-bottom: 10px;">📻</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--text-secondary);">Tiada stesen radio dijumpai</div>
+            <div style="font-size: 12px; margin-top: 4px;">Cuba gunakan kata kunci lain atau pilih kategori 'Semua'.</div>
+          </div>
+        `;
         return;
       }
 
-      currentStationList.forEach((st, idx) => {
+      filtered.forEach(st => {
         const isCurrent = activeTrack && activeTrack.id === st.id;
+        const isFav = favorites.includes(st.id);
         const card = document.createElement('div');
         card.className = 'station-card ' + (isCurrent && isPlaying ? 'playing' : '');
-        card.onclick = () => playItem(st, currentStationList);
+        card.onclick = (e) => {
+          if (e.target.closest('.btn-fav')) return;
+          playStation(st, filtered);
+        };
 
-        const badgeLabel = currentMainView === 'raya' ? (isCurrent && isPlaying ? 'SEDANG DIMAINKAN' : 'LAGU RAYA') : (isCurrent && isPlaying ? 'LIVE ON AIR' : 'PREMIUM');
+        const avatarColor = st.color || '#06b6d4';
 
         card.innerHTML = `
-          <div class="station-icon">${st.icon || (currentMainView === 'raya' ? '🌙' : '📻')}</div>
-          <div class="station-info">
-            <div class="station-name">${st.name}</div>
-            <div class="station-genre">${st.genre || ''}</div>
+          <div class="station-avatar" style="border-color: ${avatarColor}33; background: ${avatarColor}15;">
+            <span>${st.icon || '📻'}</span>
           </div>
-          <div style="display:flex; align-items:center;">
-            <div class="eq-container">
+          <div class="station-info">
+            <div class="station-title-row">
+              <span class="station-name">${st.name}</span>
+              ${st.freq ? `<span class="station-freq-badge">${st.freq}</span>` : ''}
+            </div>
+            <div class="station-genre">${st.genre || 'Siaran Muzik & Maklumat'}</div>
+            <div class="station-meta-tags">
+              ${st.state ? `<span class="meta-tag">📍 ${st.state}</span>` : ''}
+              ${st.lang ? `<span class="meta-tag">🗣️ ${st.lang}</span>` : ''}
+            </div>
+          </div>
+          <div class="station-card-actions">
+            <div class="eq-wave">
               <div class="eq-bar"></div>
               <div class="eq-bar"></div>
               <div class="eq-bar"></div>
               <div class="eq-bar"></div>
             </div>
-            <div class="badge-status">${badgeLabel}</div>
+            <button class="btn-fav ${isFav ? 'active' : ''}" onclick="toggleFavorite('${st.id}')" title="Kegemaran">
+              ${isFav ? '❤️' : '🤍'}
+            </button>
           </div>
         `;
-        stationList.appendChild(card);
+
+        stationContainer.appendChild(card);
       });
     }
 
-    // Main Lagu / Stesen
-    function playItem(item, contextList) {
-      if (!item) return;
-      activeTrack = item;
+    // ==========================================
+    // AUDIO ENGINE & PLAYBACK
+    // ==========================================
+    function playStation(st, contextList) {
+      if (!st || !st.url) return;
+      activeTrack = st;
 
-      // Jika dari folder raya, pastikan autoplay aktif
-      if (item.category === 'raya' || currentMainView === 'raya') {
-        isRayaAutoplay = true;
-      }
-
-      currentTitle.innerText = item.name;
-      statusText.innerText = (item.category === 'raya') ? "Menyediakan Lagu Raya Syawal..." : "Menghubungkan ke Audio Stream...";
-      liveIndicator.style.display = "inline-block";
-      playerProgress.classList.add('active');
+      dockStationTitle.textContent = st.name;
+      dockStatusText.textContent = 'Menyambung ke siaran...';
+      dockStatusDot.className = 'status-indicator-dot buffering';
+      dockAvatar.textContent = st.icon || '📻';
+      dockProgress.className = 'player-progress-fill buffering';
 
       if (hls) {
         hls.destroy();
         hls = null;
       }
 
-      if (item.url.includes('.m3u8') || item.type === 'hls') {
+      if (st.url.includes('.m3u8') || st.type === 'hls') {
         if (Hls.isSupported()) {
-          hls = new Hls({
-            enableWorker: true,
-            lowLatencyMode: true
-          });
-          hls.loadSource(item.url);
+          hls = new Hls({ enableWorker: true, lowLatencyMode: true });
+          hls.loadSource(st.url);
           hls.attachMedia(audio);
           hls.on(Hls.Events.MANIFEST_PARSED, () => {
-            audio.play().catch(e => console.log('Autoplay dicegah:', e));
+            audio.play().catch(e => console.log('Autoplay ditahan:', e));
           });
           hls.on(Hls.Events.ERROR, (event, data) => {
             if (data.fatal) {
-              statusText.innerText = "Gagal menyambung siaran stream.";
-              playerProgress.classList.remove('active');
+              dockStatusText.textContent = 'Gagal memuat siaran live.';
+              dockStatusDot.className = 'status-indicator-dot';
+              dockProgress.className = 'player-progress-fill';
             }
           });
         } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
-          audio.src = item.url;
+          audio.src = st.url;
           audio.play().catch(e => console.log(e));
         }
       } else {
-        audio.src = item.url;
+        audio.src = st.url;
         audio.play().catch(e => console.log(e));
       }
 
-      updateMediaSession(item);
+      updateMediaSession(st);
       renderStations();
     }
 
-    // Butang Autoplay Semua Lagu Raya
-    function startRayaAutoplay(shuffle = false) {
-      switchMainView('raya');
-      isRayaAutoplay = true;
-
-      let list = [...baseRayaSongs];
-      if (list.length === 0) return;
-
-      if (shuffle) {
-        // Rawak lagu pertama
-        const randIdx = Math.floor(Math.random() * list.length);
-        playItem(list[randIdx], list);
-      } else {
-        // Main dari lagu pertama
-        playItem(list[0], list);
-      }
-    }
-
-    // Main Lagu Seterusnya (Autoplay & Next)
-    function playNext() {
-      const list = (activeTrack && activeTrack.category === 'raya') ? baseRayaSongs : (currentStationList.length > 0 ? currentStationList : baseRadioStations);
-      if (!list || list.length === 0) return;
-
-      let currentIndex = -1;
-      if (activeTrack) {
-        currentIndex = list.findIndex(s => s.id === activeTrack.id);
-      }
-
-      let nextIndex = (currentIndex + 1) % list.length;
-      playItem(list[nextIndex], list);
-    }
-
-    // Main Lagu Sebelumnya
-    function playPrev() {
-      const list = (activeTrack && activeTrack.category === 'raya') ? baseRayaSongs : (currentStationList.length > 0 ? currentStationList : baseRadioStations);
-      if (!list || list.length === 0) return;
-
-      let currentIndex = -1;
-      if (activeTrack) {
-        currentIndex = list.findIndex(s => s.id === activeTrack.id);
-      }
-
-      let prevIndex = (currentIndex - 1 + list.length) % list.length;
-      playItem(list[prevIndex], list);
-    }
-
-    function togglePlay() {
+    function togglePlayback() {
       if (!activeTrack) {
-        if (currentMainView === 'raya' && baseRayaSongs.length > 0) {
-          startRayaAutoplay(false);
-        } else if (baseRadioStations.length > 0) {
-          playItem(baseRadioStations[0], baseRadioStations);
-        }
+        const all = getAllStations();
+        if (all.length > 0) playStation(all[0], all);
         return;
       }
+
       if (audio.paused) {
         audio.play().catch(e => console.log(e));
       } else {
@@ -1240,280 +1309,364 @@
       }
     }
 
-    // AUTO-PLAY Seterusnya Bila Lagu Habis (onended)
-    audio.addEventListener('ended', () => {
-      console.log('Lagu tamat, memainkan lagu seterusnya secara automatik...');
-      if (activeTrack && activeTrack.category === 'raya' && isRayaAutoplay) {
-        playNext();
-      } else if (currentMainView === 'raya') {
-        playNext();
-      }
-    });
+    function playNextStation() {
+      const list = getAllStations();
+      if (!list.length) return;
+      let idx = list.findIndex(s => activeTrack && s.id === activeTrack.id);
+      idx = (idx + 1) % list.length;
+      playStation(list[idx], list);
+    }
+
+    function playPreviousStation() {
+      const list = getAllStations();
+      if (!list.length) return;
+      let idx = list.findIndex(s => activeTrack && s.id === activeTrack.id);
+      idx = (idx - 1 + list.length) % list.length;
+      playStation(list[idx], list);
+    }
 
     audio.addEventListener('playing', () => {
       isPlaying = true;
-      btnPlay.innerText = '⏸';
-      statusText.innerText = (activeTrack && activeTrack.category === 'raya') ? "Sedang Memainkan Lagu Raya (Autoplay On)" : "Sedang Bersiaran Secara Langsung";
-      playerProgress.classList.remove('active');
+      dockPlayBtn.textContent = '⏸';
+      dockStatusText.textContent = 'Siaran Langsung • Audio HD';
+      dockStatusDot.className = 'status-indicator-dot live';
+      dockProgress.className = 'player-progress-fill';
       renderStations();
     });
 
     audio.addEventListener('pause', () => {
       isPlaying = false;
-      btnPlay.innerText = '▶';
-      statusText.innerText = "Siaran Dijeda";
-      playerProgress.classList.remove('active');
+      dockPlayBtn.textContent = '▶';
+      dockStatusText.textContent = 'Siaran Dijeda';
+      dockStatusDot.className = 'status-indicator-dot';
+      dockProgress.className = 'player-progress-fill';
       renderStations();
     });
 
     audio.addEventListener('waiting', () => {
-      statusText.innerText = "Buffering Audio HD...";
-      playerProgress.classList.add('active');
+      dockStatusText.textContent = 'Buffering aliran audio...';
+      dockStatusDot.className = 'status-indicator-dot buffering';
+      dockProgress.className = 'player-progress-fill buffering';
     });
 
     audio.addEventListener('error', () => {
-      statusText.innerText = "Ralat sambungan stream.";
-      playerProgress.classList.remove('active');
-      isPlaying = false;
-      btnPlay.innerText = '▶';
-      // Jika fail lagu semasa dan dalam mod autoplay lagu raya, cuba lagu seterusnya selepas 1.5 saat
-      if (activeTrack && activeTrack.category === 'raya' && isRayaAutoplay) {
-        setTimeout(() => {
-          console.log('Stream ralat, skip ke lagu seterusnya...');
-          playNext();
-        }, 1500);
-      }
+      dockStatusText.textContent = 'Aliran stream terputus / ralat pelayan.';
+      dockStatusDot.className = 'status-indicator-dot';
+      dockProgress.className = 'player-progress-fill';
     });
 
-    function updateMediaSession(station) {
+    function setVolume(val) {
+      audio.volume = parseFloat(val);
+      const btn = document.getElementById('btnMute');
+      if (audio.volume === 0) {
+        btn.textContent = '🔇';
+      } else if (audio.volume < 0.5) {
+        btn.textContent = '🔉';
+      } else {
+        btn.textContent = '🔊';
+      }
+    }
+
+    function toggleMute() {
+      audio.muted = !audio.muted;
+      const btn = document.getElementById('btnMute');
+      btn.textContent = audio.muted ? '🔇' : '🔊';
+    }
+
+    // MediaSession lock screen controls
+    function updateMediaSession(st) {
       if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
-          title: station.name,
-          artist: station.category === 'raya' ? "Koleksi Khas Raya Aidilfitri" : "MyRadio Royale VIP",
-          album: station.genre || "Exclusive Edition",
+          title: st.name,
+          artist: st.genre || 'MyRadio Malaysia',
+          album: st.freq || 'Siaran Radio Digital',
           artwork: [
-            { src: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=512&auto=format&fit=crop&q=80', sizes: '512x512', type: 'image/jpeg' }
+            { src: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=512&q=80', sizes: '512x512', type: 'image/jpeg' }
           ]
         });
 
         navigator.mediaSession.setActionHandler('play', () => audio.play());
         navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-        navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
-        navigator.mediaSession.setActionHandler('previoustrack', () => playPrev());
+        navigator.mediaSession.setActionHandler('previoustrack', () => playPreviousStation());
+        navigator.mediaSession.setActionHandler('nexttrack', () => playNextStation());
       }
     }
 
-    function filterCategory(cat) {
-      currentFilter = cat;
-      document.querySelectorAll('#radioCategoryChips .chip').forEach(c => c.classList.remove('active'));
+    // ==========================================
+    // FILTERING & FAVORITES
+    // ==========================================
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('#categoryChips .chip-btn').forEach(btn => btn.classList.remove('active'));
       if (event && event.target) {
-        event.target.classList.add('active');
+        const targetBtn = event.target.closest('.chip-btn');
+        if (targetBtn) targetBtn.classList.add('active');
       }
       renderStations();
     }
 
-    document.getElementById('searchInput').addEventListener('input', renderStations);
+    function filterByState(state) {
+      currentStateFilter = state;
+      renderStations();
+    }
 
-    function openAddModal() {
-      document.getElementById('addModal').style.display = 'flex';
+    function toggleFavorite(id) {
+      const idx = favorites.indexOf(id);
+      if (idx > -1) {
+        favorites.splice(idx, 1);
+      } else {
+        favorites.push(id);
+      }
+      localStorage.setItem('myradio_favorites', JSON.stringify(favorites));
+      updateCounts();
+      renderStations();
     }
-    function closeAddModal() {
-      document.getElementById('addModal').style.display = 'none';
+
+    // Search events
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      btnClearSearch.style.display = searchQuery ? 'block' : 'none';
+      renderStations();
+    });
+
+    function clearSearch() {
+      searchInput.value = '';
+      searchQuery = '';
+      btnClearSearch.style.display = 'none';
+      renderStations();
     }
-    function saveNewStation() {
-      const name = document.getElementById('newStationName').value.trim();
-      const category = document.getElementById('newStationCategory').value.trim() || 'popular';
-      const url = document.getElementById('newStationUrl').value.trim();
+
+    // ==========================================
+    // SLEEP TIMER
+    // ==========================================
+    function openTimerModal() {
+      document.getElementById('timerModal').style.display = 'flex';
+    }
+
+    function closeTimerModal() {
+      document.getElementById('timerModal').style.display = 'none';
+    }
+
+    function setSleepTimer(minutes) {
+      cancelSleepTimer();
+      sleepTimerRemaining = minutes * 60;
+      updateSleepTimerLabel();
+
+      sleepTimerInterval = setInterval(() => {
+        sleepTimerRemaining--;
+        updateSleepTimerLabel();
+        if (sleepTimerRemaining <= 0) {
+          cancelSleepTimer();
+          audio.pause();
+        }
+      }, 1000);
+
+      closeTimerModal();
+    }
+
+    function cancelSleepTimer() {
+      if (sleepTimerInterval) clearInterval(sleepTimerInterval);
+      sleepTimerInterval = null;
+      sleepTimerRemaining = 0;
+      document.getElementById('sleepTimerLabel').textContent = '';
+      document.getElementById('btnSleepTimer').classList.remove('live-pill');
+      closeTimerModal();
+    }
+
+    function updateSleepTimerLabel() {
+      const label = document.getElementById('sleepTimerLabel');
+      const btn = document.getElementById('btnSleepTimer');
+      if (sleepTimerRemaining > 0) {
+        const m = Math.floor(sleepTimerRemaining / 60);
+        const s = sleepTimerRemaining % 60;
+        label.textContent = `${m}m`;
+        btn.classList.add('live-pill');
+      } else {
+        label.textContent = '';
+        btn.classList.remove('live-pill');
+      }
+    }
+
+    // ==========================================
+    // CUSTOM STATIONS MODAL
+    // ==========================================
+    function openAddStationModal() {
+      document.getElementById('addStationModal').style.display = 'flex';
+    }
+
+    function closeAddStationModal() {
+      document.getElementById('addStationModal').style.display = 'none';
+    }
+
+    function saveCustomStation() {
+      const name = document.getElementById('customName').value.trim();
+      const freq = document.getElementById('customFreq').value.trim();
+      const genre = document.getElementById('customGenre').value.trim();
+      const url = document.getElementById('customUrl').value.trim();
 
       if (!name || !url) {
-        alert('Sila masukkan nama dan URL stesen.');
+        alert('Sila masukkan Nama dan URL Stream.');
         return;
       }
 
       const newSt = {
-        id: "custom_" + Date.now(),
+        id: 'custom_' + Date.now(),
         name: name,
-        genre: "Stesen Peribadi Eksklusif",
-        category: category.toLowerCase(),
-        icon: "👑",
+        freq: freq || 'Digital',
+        genre: genre || 'Stesen Sendiri',
+        category: 'komuniti',
+        icon: '📻',
         url: url,
-        type: url.includes('.m3u8') ? 'hls' : 'audio'
+        type: 'audio'
       };
 
-      customUserStations.unshift(newSt);
-      localStorage.setItem('myradio_user_added', JSON.stringify(customUserStations));
-      const elRadioCount = document.getElementById('radioCountBadge');
-      if (elRadioCount) elRadioCount.textContent = (customUserStations.length + baseRadioStations.length);
-
-      closeAddModal();
-      switchMainView('radio');
-      playItem(newSt, customUserStations);
+      customStations.unshift(newSt);
+      localStorage.setItem('myradio_custom_list', JSON.stringify(customStations));
+      closeAddStationModal();
+      updateCounts();
+      renderStations();
+      playStation(newSt, customStations);
     }
 
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js')
-        .then(() => console.log('PWA Service Worker didaftarkan.'))
-        .catch(err => console.log('SW Error:', err));
+    // ==========================================
+    // WAKTU SOLAT JAKIM & JAM DIGITAL
+    // ==========================================
+    let currentSolatZone = localStorage.getItem('myradio_solat_zone') || 'WLY01';
+    let prayerTimesCache = null;
+
+    function openSolatModal() {
+      document.getElementById('solatModal').style.display = 'flex';
+      document.getElementById('solatZoneDropdown').value = currentSolatZone;
+      fetchPrayerTimes(currentSolatZone);
     }
 
-    // Inisialisasi paparan pertama: Stesen Radio Live
-    renderStations();
+    function closeSolatModal() {
+      document.getElementById('solatModal').style.display = 'none';
+    }
 
-    // ==========================================
-    // LOGIK JAM, KALENDAR MALAYSIA & WAKTU SOLAT
-    // ==========================================
-    let currentPrayerData = null;
-    let selectedSolatZone = localStorage.getItem('myradio_solat_zone') || 'WLY01';
+    function changeSolatZone(zone) {
+      currentSolatZone = zone;
+      localStorage.setItem('myradio_solat_zone', zone);
+      fetchPrayerTimes(zone);
+    }
 
-    function updateMalaysiaClock() {
+    function updateClock() {
       const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const mins = String(now.getMinutes()).padStart(2, '0');
-      const secs = String(now.getSeconds()).padStart(2, '0');
-      const clockEl = document.getElementById('liveClock');
-      if (clockEl) clockEl.textContent = hours + ':' + mins + ':' + secs;
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('liveClockDisplay').textContent = `${h}:${m}:${s}`;
 
       const days = ['Ahad', 'Isnin', 'Selasa', 'Rabu', 'Khamis', 'Jumaat', 'Sabtu'];
       const months = ['Jan', 'Feb', 'Mac', 'Apr', 'Mei', 'Jun', 'Jul', 'Ogo', 'Sep', 'Okt', 'Nov', 'Dis'];
-      const dayName = days[now.getDay()];
-      const dayNum = now.getDate();
-      const monthName = months[now.getMonth()];
-      const year = now.getFullYear();
-      const calEl = document.getElementById('liveCalendar');
-      if (calEl) calEl.textContent = dayName + ', ' + dayNum + ' ' + monthName + ' ' + year;
+      document.getElementById('currentDateStr').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
 
       calculateNextSolat(now);
     }
 
     async function fetchPrayerTimes(zone) {
-      const selectEl = document.getElementById('solatZoneSelect');
-      if (selectEl) selectEl.value = zone;
-      
       try {
-        const res = await fetch('https://api.waktusolat.app/solat/' + zone);
-        if (!res.ok) throw new Error('Rangkaian waktu solat bermasalah');
+        const res = await fetch(`https://api.waktusolat.app/solat/${zone}`);
+        if (!res.ok) throw new Error('Network error');
         const data = await res.json();
         if (data && data.prayerTime && data.prayerTime.length > 0) {
-          const now = new Date();
-          const todayDate = now.getDate();
-          const todayEntry = data.prayerTime.find(function(item) {
-            const d = parseInt(item.date.split('-')[0], 10);
-            return d === todayDate;
-          }) || data.prayerTime[0];
-
-          currentPrayerData = todayEntry;
-          localStorage.setItem('myradio_cached_solat_' + zone, JSON.stringify(todayEntry));
-          displayPrayerTimes(todayEntry);
+          const today = new Date().getDate();
+          const todayEntry = data.prayerTime.find(item => parseInt(item.date.split('-')[0], 10) === today) || data.prayerTime[0];
+          prayerTimesCache = todayEntry;
+          localStorage.setItem(`myradio_solat_${zone}`, JSON.stringify(todayEntry));
+          displaySolatTimes(todayEntry);
         }
-      } catch (err) {
-        console.warn('Gagal muat API Solat, guna cache:', err);
-        const cached = localStorage.getItem('myradio_cached_solat_' + zone);
+      } catch (e) {
+        const cached = localStorage.getItem(`myradio_solat_${zone}`);
         if (cached) {
-          const todayEntry = JSON.parse(cached);
-          currentPrayerData = todayEntry;
-          displayPrayerTimes(todayEntry);
+          prayerTimesCache = JSON.parse(cached);
+          displaySolatTimes(prayerTimesCache);
         }
       }
     }
 
-    function format12h(timeStr) {
+    function formatTime12h(timeStr) {
       if (!timeStr) return '--:--';
       const parts = timeStr.split(':');
       let hour = parseInt(parts[0], 10);
-      const m = parts[1];
+      const min = parts[1];
       const ampm = hour >= 12 ? 'PM' : 'AM';
       hour = hour % 12 || 12;
-      return hour + ':' + m + ' ' + ampm;
+      return `${hour}:${min} ${ampm}`;
     }
 
-    function displayPrayerTimes(entry) {
+    function displaySolatTimes(entry) {
       if (!entry) return;
-      document.getElementById('time_subuh').textContent = format12h(entry.fajr);
-      document.getElementById('time_syuruk').textContent = format12h(entry.syuruk);
-      document.getElementById('time_zohor').textContent = format12h(entry.dhuhr);
-      document.getElementById('time_asar').textContent = format12h(entry.asr);
-      document.getElementById('time_maghrib').textContent = format12h(entry.maghrib);
-      document.getElementById('time_isyak').textContent = format12h(entry.isha);
-
-      if (entry.hijri) {
-        const hParts = entry.hijri.split('-');
-        const hYear = hParts[0];
-        const hMonth = parseInt(hParts[1], 10);
-        const hDay = parseInt(hParts[2], 10);
-        const hijriMonths = ['', 'Muharram', 'Safar', 'Rabiulawal', 'Rabiulakhir', 'Jamadilawal', 'Jamadilakhir', 'Rejab', 'Syaaban', 'Ramadan', 'Syawal', 'Zulkaedah', 'Zulhijjah'];
-        const hijriFormatted = hDay + ' ' + (hijriMonths[hMonth] || '') + ' ' + hYear + 'H';
-        const hijriEl = document.getElementById('hijriCalendar');
-        if (hijriEl) hijriEl.textContent = '🌙 ' + hijriFormatted;
-      }
-
-      calculateNextSolat(new Date());
+      document.getElementById('val_subuh').textContent = formatTime12h(entry.fajr);
+      document.getElementById('val_syuruk').textContent = formatTime12h(entry.syuruk);
+      document.getElementById('val_zohor').textContent = formatTime12h(entry.dhuhr);
+      document.getElementById('val_asar').textContent = formatTime12h(entry.asr);
+      document.getElementById('val_maghrib').textContent = formatTime12h(entry.maghrib);
+      document.getElementById('val_isyak').textContent = formatTime12h(entry.isha);
     }
 
     function calculateNextSolat(now) {
-      if (!currentPrayerData) return;
-
-      const prayerSlots = [
-        { id: 'subuh', name: 'Subuh', time: currentPrayerData.fajr },
-        { id: 'syuruk', name: 'Syuruk', time: currentPrayerData.syuruk },
-        { id: 'zohor', name: 'Zohor', time: currentPrayerData.dhuhr },
-        { id: 'asar', name: 'Asar', time: currentPrayerData.asr },
-        { id: 'maghrib', name: 'Maghrib', time: currentPrayerData.maghrib },
-        { id: 'isyak', name: 'Isyak', time: currentPrayerData.isha }
+      if (!prayerTimesCache) return;
+      const prayers = [
+        { name: 'Subuh', time: prayerTimesCache.fajr, id: 'card_subuh' },
+        { name: 'Syuruk', time: prayerTimesCache.syuruk, id: 'card_syuruk' },
+        { name: 'Zohor', time: prayerTimesCache.dhuhr, id: 'card_zohor' },
+        { name: 'Asar', time: prayerTimesCache.asr, id: 'card_asar' },
+        { name: 'Maghrib', time: prayerTimesCache.maghrib, id: 'card_maghrib' },
+        { name: 'Isyak', time: prayerTimesCache.isha, id: 'card_isyak' }
       ];
 
-      document.querySelectorAll('.solat-item').forEach(function(el) {
-        el.classList.remove('current-solat');
-      });
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+      let nextSolat = null;
 
-      const nowSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-      let nextSlot = null;
-      let minDiff = Infinity;
-      let activeSlotId = null;
+      document.querySelectorAll('.solat-box-card').forEach(c => c.classList.remove('active'));
 
-      prayerSlots.forEach(function(slot) {
-        const parts = slot.time.split(':').map(Number);
-        const slotSec = parts[0] * 3600 + parts[1] * 60;
-        const diff = slotSec - nowSec;
-
-        if (diff > 0 && diff < minDiff) {
-          minDiff = diff;
-          nextSlot = slot;
+      for (let p of prayers) {
+        if (!p.time) continue;
+        const [h, m] = p.time.split(':').map(Number);
+        const pMinutes = h * 60 + m;
+        if (pMinutes > currentMinutes) {
+          nextSolat = { ...p, diff: pMinutes - currentMinutes };
+          break;
         }
-        if (nowSec >= slotSec) {
-          activeSlotId = slot.id;
-        }
-      });
-
-      if (activeSlotId) {
-        const activeEl = document.getElementById('slot_' + activeSlotId);
-        if (activeEl) activeEl.classList.add('current-solat');
       }
 
-      const nextTitleEl = document.getElementById('nextSolatTitle');
-      const countdownEl = document.getElementById('solatCountdown');
+      if (!nextSolat && prayers[0].time) {
+        const [h, m] = prayers[0].time.split(':').map(Number);
+        const pMinutes = (24 * 60) + (h * 60 + m);
+        nextSolat = { ...prayers[0], diff: pMinutes - currentMinutes };
+      }
 
-      if (nextSlot) {
-        const hrs = Math.floor(minDiff / 3600);
-        const mins = Math.floor((minDiff % 3600) / 60);
-        const secs = minDiff % 60;
-        if (nextTitleEl) nextTitleEl.innerHTML = '🕌 Seterusnya: <b>' + nextSlot.name + '</b> (' + format12h(nextSlot.time) + ')';
-        if (countdownEl) countdownEl.textContent = '-' + hrs + 'j ' + mins + 'm ' + secs + 's';
-      } else {
-        if (nextTitleEl) nextTitleEl.innerHTML = '🌙 Waktu solat seterusnya esok: <b>Subuh</b>';
-        if (countdownEl) countdownEl.textContent = 'Selesai hari ini';
+      if (nextSolat) {
+        const activeCard = document.getElementById(nextSolat.id);
+        if (activeCard) activeCard.classList.add('active');
+
+        const hrs = Math.floor(nextSolat.diff / 60);
+        const mins = nextSolat.diff % 60;
+        const countStr = `${hrs > 0 ? hrs + 'j ' : ''}${mins}m`;
+
+        document.getElementById('topSolatPill').innerHTML = `🕌 Seterusnya: <strong>${nextSolat.name} (${formatTime12h(nextSolat.time)})</strong> • ${countStr}`;
+        document.getElementById('nextSolatLabel').textContent = `Waktu Seterusnya: ${nextSolat.name} (${formatTime12h(nextSolat.time)})`;
+        document.getElementById('nextSolatCount').textContent = countStr;
       }
     }
 
-    function changeSolatZone(newZone) {
-      selectedSolatZone = newZone;
-      localStorage.setItem('myradio_solat_zone', newZone);
-      fetchPrayerTimes(newZone);
+    // ==========================================
+    // INITIALIZATION
+    // ==========================================
+    updateCounts();
+    renderStations();
+
+    setInterval(updateClock, 1000);
+    updateClock();
+    fetchPrayerTimes(currentSolatZone);
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js')
+        .then(() => console.log('SW terdaftar.'))
+        .catch(err => console.log('SW error:', err));
     }
-
-    setInterval(updateMalaysiaClock, 1000);
-    updateMalaysiaClock();
-    fetchPrayerTimes(selectedSolatZone);
-
   </script>
 </body>
 </html>

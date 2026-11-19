@@ -1,5 +1,6 @@
-const CACHE_NAME = 'myradio-cache-v4';
+const CACHE_NAME = 'myradio-cache-v6';
 const ASSETS = [
+  './',
   './index.html',
   './manifest.json',
   './stations.js'
@@ -13,7 +14,7 @@ self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.map((k) => caches.delete(k))
+        keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
       );
     })
   );
@@ -21,15 +22,28 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  if (e.request.url.includes('.mp3') || e.request.url.includes('.aac') || e.request.url.includes('.m3u8') || e.request.url.includes('stream')) {
+  // Never cache live audio streams or chunk data
+  if (
+    e.request.url.includes('.mp3') ||
+    e.request.url.includes('.aac') ||
+    e.request.url.includes('.m3u8') ||
+    e.request.url.includes('.ts') ||
+    e.request.url.includes('stream') ||
+    e.request.url.includes('zeno.fm') ||
+    e.request.url.includes('revma.com') ||
+    e.request.url.includes('streamtheworld.com')
+  ) {
     return;
   }
-  // Network first supaya sentiasa dapat update terkini
+  
+  // Network first for HTML, JS and JSON
   e.respondWith(
     fetch(e.request)
       .then((response) => {
-        const cloned = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(e.request, cloned));
+        if (response && response.status === 200 && response.type === 'basic') {
+          const cloned = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(e.request, cloned));
+        }
         return response;
       })
       .catch(() => caches.match(e.request))
