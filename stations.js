@@ -884,3 +884,528 @@ const RADIO_STATIONS = [
     "type": "audio"
   }
 ];
+
+const RAYA_SONGS = [
+  {
+    "id": "raya_sudirman_balik_kampung",
+    "name": "Sudirman — Balik Kampung",
+    "genre": "Lagu Wajib Balik Kampung Paling Ikonik",
+    "category": "raya",
+    "icon": "🚗",
+    "url": "https://archive.org/download/laguraya_202004/Sudirman%20-%20Balik%20Kampung.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_pramlee_dendang_perantau",
+    "name": "Tan Sri P. Ramlee — Dendang Perantau",
+    "genre": "Karya Agung Nostalgia Perantau",
+    "category": "raya",
+    "icon": "📻",
+    "url": "https://archive.org/download/laguraya_202004/P._Ramlee_-_Dendang_Perantau.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_pramlee_suaratakbir",
+    "name": "Tan Sri P. Ramlee — Suara Takbir",
+    "genre": "Klasik Abadi Pagi Syawal",
+    "category": "raya",
+    "icon": "🕋",
+    "url": "https://archive.org/download/laguraya_202004/P.Ramlee%20-%20Suara%20Takbir.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_siti_sesucilebaran",
+    "name": "Dato' Sri Siti Nurhaliza — Sesuci Lebaran",
+    "genre": "Lagu Raya No. 1 Paling Popular Malaysia",
+    "category": "raya",
+    "icon": "👑",
+    "url": "https://archive.org/download/laguraya_202004/Siti%20Nurhaliza-Sesuci%20Lebaran.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_mnasir_satuhari",
+    "name": "Dato' M. Nasir — Satu Hari Di Hari Raya",
+    "genre": "Evergreen Melodi Emas Hari Raya",
+    "category": "raya",
+    "icon": "🎸",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/32%20-%20M%20Nasir%20-%20Satu%20Hari%20Di%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_saloma_selamat",
+    "name": "Puan Sri Saloma — Selamat Hari Raya",
+    "genre": "Suasana Lebaran Manis Klasik",
+    "category": "raya",
+    "icon": "🌸",
+    "url": "https://archive.org/download/laguraya_202004/Saloma%20-%20Selamat%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_anuar_ellina",
+    "name": "Anuar Zain & Ellina — Suasana Hari Raya",
+    "genre": "Ceria Riang Kanak-Kanak & Remaja",
+    "category": "raya",
+    "icon": "🎆",
+    "url": "https://archive.org/download/laguraya_202004/Anuarzain%26Ellina%20-%20Suasana%20Hari%20%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_ujirashid_hailamir",
+    "name": "Hail Amir & Uji Rashid — Seloka Hari Raya",
+    "genre": "Duet Paling Manis & Ceria Sepanjang Zaman",
+    "category": "raya",
+    "icon": "✨",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/1-06%20Seloka%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_blackdogbone",
+    "name": "Black Dog Bone — Cahaya Aidilfitri",
+    "genre": "Lagu Pop Nostalgia Menggamit Rindu",
+    "category": "raya",
+    "icon": "🕯️",
+    "url": "https://archive.org/download/laguraya_202004/Black_Dog_Bone_-_Cahaya_Aidilfitri.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_djdave",
+    "name": "D.J Dave — Menjelang Hari Raya",
+    "genre": "Gaya Irama Riang Nostalgia",
+    "category": "raya",
+    "icon": "🕺",
+    "url": "https://archive.org/download/laguraya_202004/D.J%20Dave%20-%20Menjelang%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_amanshah",
+    "name": "Aman Shah — Kepulangan Yang Dinanti",
+    "genre": "Lagu Syahdu Rintihan Perantau Pulang",
+    "category": "raya",
+    "icon": "🏡",
+    "url": "https://archive.org/download/20-lagu-lagu-hari-raya-aidilfitri/04%20Kepulangan%20Yang%20Dinanti%20-%20Aman%20Shah.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_sudirman_darijauh",
+    "name": "Sudirman — Dari Jauh Ku Pohon Maaf",
+    "genre": "Kemaafan Tulus Dari Kejauhan",
+    "category": "raya",
+    "icon": "💌",
+    "url": "https://archive.org/download/laguraya_202004/Sudirman_-_Dari_Jauh_Ku_Pohon_Maaf.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_faizaltahir",
+    "name": "Faizal Tahir — Kepulangan Yang Dinanti (Versi Akustik Rock)",
+    "genre": "Nafas Baharu Ikonik Generasi Kini",
+    "category": "raya",
+    "icon": "🎸",
+    "url": "https://archive.org/download/laguraya_202004/Faizal%20Tahir%20-%20Kepulangan%20Yang%20Dinanti.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_aishah_pulanglah",
+    "name": "Aishah — Pulanglah",
+    "genre": "Vokal Penuh Emosi Menusuk Kalbu",
+    "category": "raya",
+    "icon": "🥺",
+    "url": "https://archive.org/download/laguraya_202004/Aishah_-_Pulanglah.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_hujan_raihan",
+    "name": "Hujan & Raihan — Salam Aidilfitri Ayahanda Dan Bonda",
+    "genre": "Kolaborasi Indie Rock & Nasyid Moden",
+    "category": "raya",
+    "icon": "🌧️",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/23%20-%20Hujan%20%26%20Raihan%20-%20Salam%20Aidilfitri%20Ayahanda%20Dan%20Bonda.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_slam_suasana",
+    "name": "Slam (Zamani) — Suasana Hari Raya",
+    "genre": "Vokal Gemersik Balada Raya Rock",
+    "category": "raya",
+    "icon": "🎤",
+    "url": "https://archive.org/download/laguraya_202004/Slam%20-%20Suasana%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_awie_ziana",
+    "name": "Awie & Ziana Zain — Sensasi Hari Raya",
+    "genre": "Duet Berbisa Rock Kapak Raya",
+    "category": "raya",
+    "icon": "⚡",
+    "url": "https://archive.org/download/laguraya_202004/Awie_&_Ziana_Zain_-_Sensasi_Hari_Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_sharifah_aini_suasana",
+    "name": "Datin Paduka Sharifah Aini — Suasana Hari Raya",
+    "genre": "Keanggunan Suara Emas Hari Raya",
+    "category": "raya",
+    "icon": "💎",
+    "url": "https://archive.org/download/20-lagu-lagu-hari-raya-aidilfitri/03%20Suasana%20Hari%20Raya%20-%20Sharifah%20Aini.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_sudirman_inang",
+    "name": "Sudirman & Zaleha Hamid — Inang Di Aidilfitri",
+    "genre": "Tarian Inang Hari Raya Tradisional",
+    "category": "raya",
+    "icon": "💃",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/SUDIRMAN-ZALEHA%20HAMID-InangDiAidilfitri.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_noorkumalasari",
+    "name": "Noorkumalasari — Pulang Di Hari Raya",
+    "genre": "Irama Pop Retro Nostalgia",
+    "category": "raya",
+    "icon": "👠",
+    "url": "https://archive.org/download/laguraya_202004/Raya%20-%20Noorkumalasari%20-%20Pulang%20Di%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_rahimah_rahim",
+    "name": "Rahimah Rahim — Selamat Berhari Raya",
+    "genre": "Irama Riang Ceria Beraya",
+    "category": "raya",
+    "icon": "🎉",
+    "url": "https://archive.org/download/laguraya_202004/Rahimah%20Rahim%20-%20Selamat%20Berhari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_sanisah_aidilfitri",
+    "name": "Sanisah Huri — Aidilfitri",
+    "genre": "Alunan Klasik Menggamit Kenangan",
+    "category": "raya",
+    "icon": "🌙",
+    "url": "https://archive.org/download/laguraya_202004/Sanisah%20Huri%20-%20Aidilfitri.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_sanisah_bersabarlah",
+    "name": "Sanisah Huri — Bersabarlah Sayang",
+    "genre": "Rintihan Syahdu Kekasih Di Rantau",
+    "category": "raya",
+    "icon": "🍂",
+    "url": "https://archive.org/download/laguraya_202004/Sanisah_Huri_-_Bersabarlah_Sayang.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_ahmad_jais",
+    "name": "Ahmad Jais — Selamat Hari Raya",
+    "genre": "Irama Tradisi Asli Melayu",
+    "category": "raya",
+    "icon": "🌿",
+    "url": "https://archive.org/download/laguraya_202004/Ahmad_Jais_-_Selamat_Hari_Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_senario",
+    "name": "Senario — Seminggu Berhari Raya",
+    "genre": "Lagu Raya Kelakar & Menghiburkan",
+    "category": "raya",
+    "icon": "😆",
+    "url": "https://archive.org/download/laguraya_202004/Senario_-_Seminggu_Berhari_Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_4u2c",
+    "name": "4U2C — Bergema Takbir Di Pagi Raya",
+    "genre": "Irama Hip Hop / Rap Raya 90-an",
+    "category": "raya",
+    "icon": "🧢",
+    "url": "https://archive.org/download/laguraya_202004/4U2C_-_Bergema_Takbir.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_fazidah_joned",
+    "name": "Fazidah Joned — Selamat Hari Raya",
+    "genre": "Klasik Asli Seri Aidilfitri",
+    "category": "raya",
+    "icon": "🌺",
+    "url": "https://archive.org/download/20-lagu-lagu-hari-raya-aidilfitri/17%20Selamat%20Hari%20Raya%20-%20Fazidah%20Joned.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_junainah",
+    "name": "Junainah M. Amin — Suasana Riang Di Hari Raya",
+    "genre": "Evergreen Ceria Lebaran",
+    "category": "raya",
+    "icon": "🪅",
+    "url": "https://archive.org/download/laguraya_202004/Junaidah%20-%20Suasana%20Riang%20Di%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_rafeah_buang",
+    "name": "Rafeah Buang — Bila Takbir Bergema",
+    "genre": "Alunan Sayu Hati Menitis Air Mata",
+    "category": "raya",
+    "icon": "🕊️",
+    "url": "https://archive.org/download/20-lagu-lagu-hari-raya-aidilfitri/22%20Bila%20Takbir%20Bergema%20-%20Rafeah%20Buang.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_sony_all_stars",
+    "name": "Sony All Stars — Warna Warni Aidilfitri",
+    "genre": "Gabungan Artis Ramai-Ramai Riang Raya",
+    "category": "raya",
+    "icon": "🌈",
+    "url": "https://archive.org/download/laguraya_202004/Sony%20All%20Star%20-%20Warna%20Warni%20Aidilfitri.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_jamal_salam",
+    "name": "Jamal Abdillah — Salam Aidilfitri",
+    "genre": "Klasik Vokal Raja Pop Malaysia",
+    "category": "raya",
+    "icon": "👑",
+    "url": "https://archive.org/download/laguraya_202004/Jamal_Abdillah_-_Salam_Aidilfitri.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_amy_mastura",
+    "name": "Amy Mastura — Bersama Di Hari Raya",
+    "genre": "Pop Ceria & Manis Hari Raya",
+    "category": "raya",
+    "icon": "🍭",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/10%20-%20Amy%20Mastura%20-%20Bersama%20Di%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_ziana_zain",
+    "name": "Ziana Zain — Indah Di Hari Raya",
+    "genre": "Vokal Nada Tinggi Berbisa",
+    "category": "raya",
+    "icon": "✨",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/57%20-%20Ziana%20Zain%20-%20Indah%20Di%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_wings_keroncong",
+    "name": "Wings — Keroncong Hari Raya",
+    "genre": "Rock Keroncong Versi Wings & Awie",
+    "category": "raya",
+    "icon": "🎸",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/54%20-%20Wings%20-%20Keroncong%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_siti_suaratakbir",
+    "name": "Dato' Sri Siti Nurhaliza — Suara Takbir",
+    "genre": "Vokal Lembut Alunan Syahdu",
+    "category": "raya",
+    "icon": "🌙",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/SitiNurhaliza-SuaraTakbir.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_zainal_dendang",
+    "name": "Zainal Abidin — Dendang Perantau (World Music)",
+    "genre": "Irama World Music Sentuhan Zainal Abidin",
+    "category": "raya",
+    "icon": "🥁",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/Zainal_Abidin_-_Dendang_Perantau.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_aishah_maklimah",
+    "name": "Aishah — Lenggang Mak Limah",
+    "genre": "Irama Tradisi Joget Ceria",
+    "category": "raya",
+    "icon": "🎉",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/Aishah-LenggangMakLimah.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_siti_meriah",
+    "name": "Dato' Sri Siti Nurhaliza — Meriah Suasana Hari Raya",
+    "genre": "Pop Rancak Riang Ria Bersama",
+    "category": "raya",
+    "icon": "🎊",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/SitiNurhaliza-MeriahSuasanaHariRaya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_nonstop_terbaik_2022",
+    "name": "Kompilasi Mega Nonstop Lagu Raya (Audio HD)",
+    "genre": "Putaran Berterusan 2 Jam Lagu Raya Terbaik",
+    "category": "raya",
+    "icon": "🔥",
+    "url": "https://archive.org/download/lagu-raya-2022-lagu-raya-aidilfitri-suasana-hari-raya-koleksi-lagu-raya-terbaik-sepanjang-zaman-1/KOLEKSI%20LAGU%20RAYA%20NOSTALGIA%20TERBAIK.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_ketipak_ketipung",
+    "name": "Aisha Retno & Aziz Harun — Ketipak Ketipung Raya",
+    "genre": "Hits Raya Moden Terhangat & Viral",
+    "category": "raya",
+    "icon": "🔥",
+    "url": "https://archive.org/download/aisha-retno-aziz-harun-ketipak-ketipung-raya-official-video/Aisha%20Retno%2C%20Aziz%20Harun%20-%20Ketipak%20Ketipung%20Raya%20%28Official%20Video%29.webm",
+    "type": "audio"
+  },
+  {
+    "id": "raya_mamat_restu",
+    "name": "Mamat Exists — Ku Pohon Restu Ayah Bonda",
+    "genre": "Syahdu Menyentuh Jiwa Anak Perantau",
+    "category": "raya",
+    "icon": "🥺",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/34%20-%20Mamat%20-%20Ku%20Pohon%20Restu%20Ayah%20Bonda.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_awie_ziana_halaman",
+    "name": "Awie & Ziana Zain — Halaman Asmara",
+    "genre": "Duet Romantik Pop Rock Nostalgia Lebaran",
+    "category": "raya",
+    "icon": "💖",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/16%20-%20Awie%20%26%20Ziana%20Zain%20-%20Halaman%20Asmara.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_siti_airmatasyawal",
+    "name": "Dato' Sri Siti Nurhaliza — Air Mata Syawal",
+    "genre": "Alunan Vokal Syahdu Menggamit Memori",
+    "category": "raya",
+    "icon": "💧",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/Siti%20Nurhaliza%20-%20Air%20Mata%20Syawal.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_siti_anugerah",
+    "name": "Dato' Sri Siti Nurhaliza — Anugerah Aidilfitri",
+    "genre": "Pop Irama Klasik Hari Raya",
+    "category": "raya",
+    "icon": "🌟",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/Siti%20Nurhaliza%20-%20Anugerah%20Aidilfitri.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_siti_bilaraya",
+    "name": "Dato' Sri Siti Nurhaliza — Bila Raya Menjelma",
+    "genre": "Lagu Riang Gembira Sambutan Syawal",
+    "category": "raya",
+    "icon": "🎈",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/Siti%20Nurhaliza%20-%20Bila%20Raya%20Menjelma.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_siti_noraniza_newboys",
+    "name": "Siti Nurhaliza, Noraniza Idris & New Boyz — Nikmat Hari Raya",
+    "genre": "Pop Etnik Ceria Penuh Kemeriahan",
+    "category": "raya",
+    "icon": "🎭",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/49%20-%20Siti%20Nurhaliza%2C%20Noraniza%20Idris%20%26%20New%20Boys%20-%20Nikmat%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_sjibeng_musafir",
+    "name": "S. Jibeng — Musafir Di Aidilfitri",
+    "genre": "Lagu Air Mata Klasik Paling Legend",
+    "category": "raya",
+    "icon": "🕊️",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/SJibeng-MusafirdiAidilfitri.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_sharifah_aini_hariyangmulia",
+    "name": "Datin Paduka Sharifah Aini — Hari Yang Mulia",
+    "genre": "Vokal Emas Klasik Sepanjang Zaman",
+    "category": "raya",
+    "icon": "🪔",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/46%20-%20Sharifah%20Aini%20-%20Hari%20Yang%20Mulia.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_sharifah_aini_nostalgia",
+    "name": "Datin Paduka Sharifah Aini — Nostalgia Aidilfitri",
+    "genre": "Melodi Nostalgia Suasana Kampung Halaman",
+    "category": "raya",
+    "icon": "🏡",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/48%20-%20Sharifah%20Aini%20-%20Nostalgia%20Aidil%20Fitri.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_jayjay_bahagia",
+    "name": "Jay Jay — Hari Raya Bahagia",
+    "genre": "Pop Lebaran Ceria & Romantis",
+    "category": "raya",
+    "icon": "😊",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/25%20-%20Jay%20Jay%20-%20Hari%20Raya%20Bahagia.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_feminin_kurniaan",
+    "name": "Feminin — Kurniaan Di Hari Raya",
+    "genre": "Pop Harmoni Nostalgia 90-an",
+    "category": "raya",
+    "icon": "👭",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/21%20-%20Feminin%20-%20Kurniaan%20Di%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_alleycats_dayangku",
+    "name": "Alleycats & Dayangku Intan — Selamat Hari Raya",
+    "genre": "Gaya Pop Klasik Sentuhan Emas",
+    "category": "raya",
+    "icon": "🎶",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/09%20-%20Alleycats%20%26%20%20Dayang%20Ku%20Intan%20-%20Selamat%20Hari%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_khatijah_bingkisan",
+    "name": "Khatijah Ibrahim — Bingkisan Untuk Perwira",
+    "genre": "Tribute Khas Syawal Buat Pejuang Negara",
+    "category": "raya",
+    "icon": "🇲🇾",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/KhatijahIbrahim-BingkisanUntukPerwira.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_senario_puasaraya",
+    "name": "Senario — Puasa Dan Raya",
+    "genre": "Lawak & Jenaka Usik-mengusik Bulan Puasa & Raya",
+    "category": "raya",
+    "icon": "🤣",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/44%20-%20Senario%20-%20Puasa%20Raya.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_raihan_untuksemua",
+    "name": "Raihan & NowSeeHeart — Hari Raya Untuk Semua",
+    "genre": "Nasyid Moden Kedamaian Syawal",
+    "category": "raya",
+    "icon": "🤝",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/39%20-%20Raihan%20%26%20NowSeeHeart%20-%20Hari%20Raya%20Untuk%20Semua.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_raihan_lebaranini",
+    "name": "Raihan, NowSeeHeart, Rem & Ajai — Lebaran Ini",
+    "genre": "Kolaborasi Mantap Kemaafan Di Hari Raya",
+    "category": "raya",
+    "icon": "🫡",
+    "url": "https://archive.org/download/Kompilasi-Lagu-Raya-Sepanjang-Zaman-2022/42%20-%20Raihan%2C%20Nowseeheart%2C%20Rem%20%26%20Ajai%20-%20Lebaran%20Ini.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_nonstop_evergreen_vol2",
+    "name": "Koleksi Raya Terhebat Sepanjang Zaman Vol 2 (Audio HD)",
+    "genre": "Putaran Panjang Nonstop Lagu-Lagu Pilihan Terbaik",
+    "category": "raya",
+    "icon": "📦",
+    "url": "https://archive.org/download/lagu-raya-2022-lagu-raya-aidilfitri-suasana-hari-raya-koleksi-lagu-raya-terbaik-sepanjang-zaman-1/Koleksi%20Lagu%20Raya%20Terhebat%20Sepanjang%20Zaman%20VOL%202%20HIGH%20QUALITY%20AUDIO.mp3",
+    "type": "audio"
+  },
+  {
+    "id": "raya_takbir_full",
+    "name": "Gema Takbir Raya Aidilfitri Penuh (Makkah & Malaysia)",
+    "genre": "Alunan Takbir Hari Raya Syahdu",
+    "category": "raya",
+    "icon": "🕌",
+    "url": "https://archive.org/download/lagu-raya-aidilfitri/TAKBIRRAYAFULL.mp3",
+    "type": "audio"
+  }
+];

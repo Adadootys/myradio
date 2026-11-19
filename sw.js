@@ -1,4 +1,4 @@
-const CACHE_NAME = 'myradio-cache-v6';
+const CACHE_NAME = 'myradio-cache-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -22,13 +22,14 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  // Never cache live audio streams or chunk data
+  // Never cache audio streams or live chunks
   if (
     e.request.url.includes('.mp3') ||
     e.request.url.includes('.aac') ||
     e.request.url.includes('.m3u8') ||
     e.request.url.includes('.ts') ||
     e.request.url.includes('stream') ||
+    e.request.url.includes('archive.org') ||
     e.request.url.includes('zeno.fm') ||
     e.request.url.includes('revma.com') ||
     e.request.url.includes('streamtheworld.com')
