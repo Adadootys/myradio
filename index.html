@@ -958,7 +958,7 @@
 
   <div class="raya-sub-bar">
     <span>🌾 SUASANA HARI RAYA AIDILFITRI</span>
-    <span id="headerTotalStats">58 LAGU RAYA • 68 STESEN RADIO</span>
+    <span id="headerTotalStats">58 LAGU RAYA • 115 STESEN RADIO</span>
   </div>
 
   <!-- Waktu Jam & Waktu Solat Malaysia Widget -->
@@ -1030,7 +1030,7 @@
       🌙 Folder Lagu Raya <span class="view-tab-count" id="rayaCountBadge">58</span>
     </button>
     <button class="view-tab" id="tabRadio" onclick="switchMainView('radio')">
-      📻 Stesen Radio Live <span class="view-tab-count" id="radioCountBadge">68</span>
+      📻 Stesen Radio Live <span class="view-tab-count" id="radioCountBadge">115</span>
     </button>
   </div>
 
@@ -1065,6 +1065,7 @@
   <div class="category-chips" id="radioCategoryChips" style="display:none;">
     <button class="chip active" onclick="filterCategory('semua')">✦ Semua Stesen</button>
     <button class="chip" onclick="filterCategory('popular')">🔥 Paling Hangat</button>
+    <button class="chip" onclick="filterCategory('dugem')">⚡ DJ Dugem & EDM</button>
     <button class="chip" onclick="filterCategory('rtm')">🏛️ Radio Negeri RTM</button>
     <button class="chip" onclick="filterCategory('berita')">📰 Berita & Analisis</button>
     <button class="chip" onclick="filterCategory('islamik')">🕌 Santapan Rohani</button>
@@ -1107,7 +1108,7 @@
     <div class="modal-card">
       <h3>Tambah Stesen Baharu</h3>
       <input type="text" id="newStationName" class="modal-input" placeholder="Nama Stesen (cth: Suria FM)">
-      <input type="text" id="newStationCategory" class="modal-input" placeholder="Kategori (popular / muzik / islamik)">
+      <input type="text" id="newStationCategory" class="modal-input" placeholder="Kategori (popular / dugem / muzik / islamik)">
       <input type="text" id="newStationUrl" class="modal-input" placeholder="URL Stream (mp3 / aac / m3u8)">
       <div class="modal-buttons">
         <button class="btn-action btn-secondary" onclick="closeAddModal()">Batal</button>
@@ -1166,8 +1167,10 @@
     // Update nombor lencana tab
     const elRadioCount = document.getElementById('radioCountBadge');
     const elRayaCount = document.getElementById('rayaCountBadge');
+    const elHeaderTotal = document.getElementById('headerTotalStats');
     if (elRadioCount) elRadioCount.textContent = (customUserStations.length + baseRadioStations.length);
     if (elRayaCount) elRayaCount.textContent = baseRayaSongs.length;
+    if (elHeaderTotal) elHeaderTotal.textContent = `${baseRayaSongs.length} LAGU RAYA • ${customUserStations.length + baseRadioStations.length} STESEN RADIO`;
 
     // Tukar View Antara Lagu Raya & Radio Live
     function switchMainView(view) {
@@ -1209,7 +1212,11 @@
         const allRadio = [...customUserStations, ...baseRadioStations];
         currentStationList = allRadio.filter(s => {
           const matchCategory = currentFilter === 'semua' || s.category === currentFilter;
-          const matchSearch = s.name.toLowerCase().includes(query) || (s.genre && s.genre.toLowerCase().includes(query));
+          const matchSearch = s.name.toLowerCase().includes(query) || 
+            (s.genre && s.genre.toLowerCase().includes(query)) ||
+            (s.category && s.category.toLowerCase().includes(query)) ||
+            (s.state && s.state.toLowerCase().includes(query)) ||
+            (s.freq && s.freq.toLowerCase().includes(query));
           return matchCategory && matchSearch;
         });
       }
@@ -1458,6 +1465,8 @@
       localStorage.setItem('myradio_user_added', JSON.stringify(customUserStations));
       const elRadioCount = document.getElementById('radioCountBadge');
       if (elRadioCount) elRadioCount.textContent = (customUserStations.length + baseRadioStations.length);
+      const elHeaderTotal = document.getElementById('headerTotalStats');
+      if (elHeaderTotal) elHeaderTotal.textContent = `${baseRayaSongs.length} LAGU RAYA • ${customUserStations.length + baseRadioStations.length} STESEN RADIO`;
 
       closeAddModal();
       switchMainView('radio');
